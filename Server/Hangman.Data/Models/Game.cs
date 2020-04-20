@@ -8,6 +8,6 @@ namespace Hangman.Data.Models
 {
     public class Game
     {
-
+        public string GameId { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Hangman.Data.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Game> builder)
         {
-           // TODO:
+            builder.HasKey(pk => pk.GameId);
         }
     }
 }
