@@ -20,7 +20,7 @@ namespace Hangman.Server.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return Content("ss");
         }
 
         public IActionResult Privacy()
@@ -31,7 +31,7 @@ namespace Hangman.Server.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return Json(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
