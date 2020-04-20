@@ -1,3 +1,4 @@
 # Hangman
 
-Full stack Web App with .NET 5 and Angular 9
+Hangman game :)
+Full stack Web Application with .NET 5 and Angular 9
