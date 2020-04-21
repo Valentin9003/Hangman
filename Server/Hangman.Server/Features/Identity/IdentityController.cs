@@ -1,23 +1,25 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using Hangman.Data.Models;
 using Microsoft.Extensions.Options;
 using Hangman.Server.Features.Identity.Models;
 using Hangman.Server.Features.Identity;
+using Hangman.Server.Data.Models;
+using Hangman.Server.Features;
 
 namespace Hangman.Server.Controllers
 {
-    public class IdentityController : Controller
+    public class IdentityController : ApiController
     {
         private readonly UserManager<User> userManager;
         private readonly AppSettings appSettings;
-        private readonly IdentityService identityService;
+        private readonly IIdentityService identityService;
 
-        public IdentityController(UserManager<User> usermanager, IdentityService identityService, IOptions<AppSettings> appSettings)
+        public IdentityController(UserManager<User> usermanager, IIdentityService identityService, IOptions<AppSettings> appSettings)
         {
             this.userManager = usermanager;
             this.appSettings = appSettings.Value;
+            this.identityService = identityService;
         }
 
         [HttpPost]
@@ -38,7 +40,7 @@ namespace Hangman.Server.Controllers
                 return Unauthorized();
             }
 
-            var token = await this.identityService.GenerateJwtToken(
+            var token = this.identityService.GenerateJwtToken(
                 user.Id,
                 user.UserName,
                 this.appSettings.Secret);
