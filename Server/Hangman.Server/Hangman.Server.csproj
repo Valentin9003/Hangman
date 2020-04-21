@@ -12,10 +12,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.0-preview.2.20167.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0-preview.2.20159.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0-preview.2.20159.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Hangman.Data\Hangman.Data.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0-preview.2.20160.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0-preview.2.20160.3" />
   </ItemGroup>
 
   <ItemGroup>

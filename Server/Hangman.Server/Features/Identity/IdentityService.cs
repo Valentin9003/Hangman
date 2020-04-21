@@ -9,7 +9,7 @@ namespace Hangman.Server.Features.Identity
 {
     public class IdentityService : IIdentityService
     {
-        public async Task<string> GenerateJwtToken(string userId, string userName, string secret)
+        public string GenerateJwtToken(string userId, string userName, string secret)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(secret);

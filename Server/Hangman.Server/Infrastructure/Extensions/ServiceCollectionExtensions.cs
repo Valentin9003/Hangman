@@ -1,13 +1,10 @@
-﻿using Hangman.Data;
-using Hangman.Data.Models;
+﻿using Hangman.Server.Data;
+using Hangman.Server.Data.Models;
+using Hangman.Server.Features.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Hangman.Server.Infrastructure.Extensions
 {
@@ -32,5 +29,10 @@ namespace Hangman.Server.Infrastructure.Extensions
 
             return services;
         }
+
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+           => services
+               .AddTransient<IIdentityService, IdentityService>();
+
     }
 }

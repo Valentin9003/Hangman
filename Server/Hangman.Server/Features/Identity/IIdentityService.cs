@@ -7,6 +7,6 @@ namespace Hangman.Server.Features.Identity
 {
     public interface IIdentityService
     {
-       Task<string> GenerateJwtToken(string userId, string userName, string secret);
+       string GenerateJwtToken(string userId, string userName, string secret);
     }
 }

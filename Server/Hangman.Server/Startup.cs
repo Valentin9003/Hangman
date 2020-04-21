@@ -16,11 +16,12 @@ namespace Hangman.Server
 
         public IConfiguration Configuration { get; }
         
-        public void ConfigureServices(IServiceCollection services) => services
+        public void ConfigureServices(IServiceCollection services) => services   
                     .AddDatabase(this.Configuration)
                     .AddIdentity()
+                    .AddApplicationServices()
                     .AddControllers();
-        
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -28,7 +29,7 @@ namespace Hangman.Server
                 app.UseDeveloperExceptionPage()
                    .UseDatabaseErrorPage();
             }
-
+            
             app.UseHttpsRedirection()
                .UseRouting()
                .UseAuthentication()
