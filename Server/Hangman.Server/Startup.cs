@@ -19,6 +19,7 @@ namespace Hangman.Server
         public void ConfigureServices(IServiceCollection services) => services   
                     .AddDatabase(this.Configuration)
                     .AddIdentity()
+                    .ConfigureJwtAutentication(this.Configuration)
                     .AddApplicationServices()
                     .AddControllers();
 

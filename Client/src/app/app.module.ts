@@ -7,12 +7,18 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { WordComponent } from './word/word.component';
+import { VictimPictureComponent } from './victim-picture/victim-picture.component';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    WordComponent,
+    VictimPictureComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,

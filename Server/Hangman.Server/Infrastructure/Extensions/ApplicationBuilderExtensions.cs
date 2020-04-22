@@ -15,5 +15,10 @@ namespace Hangman.Server.Infrastructure.Extensions
 
             dbContext.Database.Migrate();
         }
+
+        public static void JwtAuthentication(this IApplicationBuilder app)
+        {
+
+        }
     }
 }
