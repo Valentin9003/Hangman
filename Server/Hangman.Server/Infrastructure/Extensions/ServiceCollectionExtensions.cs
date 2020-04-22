@@ -1,10 +1,13 @@
 ﻿using Hangman.Server.Data;
 using Hangman.Server.Data.Models;
 using Hangman.Server.Features.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Hangman.Server.Infrastructure.Extensions
 {
@@ -34,5 +37,29 @@ namespace Hangman.Server.Infrastructure.Extensions
            => services
                .AddTransient<IIdentityService, IdentityService>();
 
+        public static IServiceCollection ConfigureJwtAutentication(this IServiceCollection services, IConfiguration configuration)
+        {
+            var appSettings = configuration.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+            return services;
+        }
     }
 }
