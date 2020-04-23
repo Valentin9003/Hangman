@@ -19,4 +19,19 @@ export class AuthService {
   register(data:any){
     return this.http.post(this.registerPath, data)
   }
+
+  setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  getToken(): string {
+    return localStorage.getItem('token');
+  }
+
+  isAuthenticated(): boolean {
+   if(this.getToken){
+    return true;
+    }
+    return false;
+  }
 }

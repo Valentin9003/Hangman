@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { WordComponent } from './word/word.component';
 import { VictimPictureComponent } from './victim-picture/victim-picture.component';
 import { UserInfoComponent } from './user-info/user-info.component';
+import { AlphabetComponent } from './alphabet/alphabet.component';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { UserInfoComponent } from './user-info/user-info.component';
     RegisterComponent,
     WordComponent,
     VictimPictureComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    AlphabetComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
