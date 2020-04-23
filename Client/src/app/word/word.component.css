@@ -1,15 +1,24 @@
 
 .word-component{
+    padding: 1%;
     
 }
 
 .word{
-
+background-color: white;
 }
 
 .letter{
+    font-size: 1.5em;
+    background-color:snow;
     display:inline-flex;
     border-radius: 100%;
     border-style:groove;
-    padding: 1rem;
+    border-right-color: red;
+    border-left-color: red;
+    border-top-color: black;
+    border-bottom-color: black;
+    color: blue;
+    padding: 1%;
+    margin: 1%;
 }

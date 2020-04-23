@@ -1,18 +1,22 @@
-.alphabet{
-
-}
-
-.alphabet-component{
-
+.alphabet{      
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+     /* display: flex; 
+    align-items: center;
+    align-content: center;
+    justify-content: center; */
 }
 
 .letter{
-    display:inline-flex;
+    display: inline-flex;
+    list-style-type: none;
     border-radius: 100%;
     border-style:groove;
-    border-color: crimson;
+    border-right-color: red;
+    border-left-color: red;
+    border-top-color: blue;
+    border-bottom-color: blue;
     background-color: black;
-    color: blanchedalmond;
-    padding: 1%;
-    margin: 1px;
+    color: greenyellow;
+    padding: 5px;
+    margin: 1px;  
 }
