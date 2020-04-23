@@ -1,0 +1,15 @@
+
+.word-component{
+    
+}
+
+.word{
+
+}
+
+.letter{
+    display:inline-flex;
+    border-radius: 100%;
+    border-style:groove;
+    padding: 1rem;
+}

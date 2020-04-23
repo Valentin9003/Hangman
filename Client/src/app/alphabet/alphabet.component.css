@@ -1,0 +1,18 @@
+.alphabet{
+
+}
+
+.alphabet-component{
+
+}
+
+.letter{
+    display:inline-flex;
+    border-radius: 100%;
+    border-style:groove;
+    border-color: crimson;
+    background-color: black;
+    color: blanchedalmond;
+    padding: 1%;
+    margin: 1px;
+}
