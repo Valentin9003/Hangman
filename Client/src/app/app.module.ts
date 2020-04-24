@@ -12,6 +12,8 @@ import { VictimPictureComponent } from './victim-picture/victim-picture.componen
 import { UserInfoComponent } from './user-info/user-info.component';
 import { AlphabetComponent } from './alphabet/alphabet.component';
 import { GameComponent } from './game/game.component';
+import { GameStatusComponent } from './game.status/game.status.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { GameComponent } from './game/game.component';
     VictimPictureComponent,
     UserInfoComponent,
     AlphabetComponent,
-    GameComponent
+    GameComponent,
+    GameStatusComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

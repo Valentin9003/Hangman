@@ -4,7 +4,16 @@
 
 export const environment = {
   production: false,
-  apiUrl: "localhost:4200/"
+  apiUrl: "https://localhost:4200/",
+  gameUrls:{
+    getWord: "game/getword",
+    changeWord: "game/changeword"
+  },
+  authUrls:{
+   register: "identity/register",
+   login: "identity/login"
+  }
+
 };
 
 /*

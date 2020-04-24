@@ -1,6 +1,8 @@
 .victim-picture{
-    border-style: dotted;
-    border-color: brown;
-    width: 30%;
-    height: 30%;
+    border-style:groove;
+    border-right-color: red;
+    border-left-color: red;
+    border-top-color: black;
+    border-bottom-color: black;
+    max-width: 100%
 }

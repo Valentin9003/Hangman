@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 login(){
-  this.authService.saveToken(this.loginForm.value)
+  this.authService.login(this.loginForm.value)
   this.router.navigate(['localhost:4200']); // TODO: Change Route
 }
 
