@@ -1,7 +1,6 @@
 
 .word-component{
-    padding: 1%;
-    
+    padding: 1%; 
 }
 
 .word{
@@ -9,16 +8,10 @@ background-color: white;
 }
 
 .letter{
-    font-size: 1.5em;
+    font-size: 2em;
     background-color:snow;
     display:inline-flex;
-    border-radius: 100%;
-    border-style:groove;
-    border-right-color: red;
-    border-left-color: red;
-    border-top-color: black;
-    border-bottom-color: black;
     color: blue;
-    padding: 1%;
-    margin: 1%;
+    padding: 0.5%;
+    margin: 0.5%;
 }

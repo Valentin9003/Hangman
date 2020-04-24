@@ -1,22 +1,18 @@
 .alphabet{      
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-     /* display: flex; 
-    align-items: center;
-    align-content: center;
-    justify-content: center; */
-}
+    display: grid;
+    width:220px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    
 
-.letter{
-    display: inline-flex;
+}
+ .letter{
+    font-size: 1.9em;
     list-style-type: none;
-    border-radius: 100%;
     border-style:groove;
-    border-right-color: red;
-    border-left-color: red;
-    border-top-color: blue;
-    border-bottom-color: blue;
+    border-color: black;
     background-color: black;
     color: greenyellow;
-    padding: 5px;
-    margin: 1px;  
-}
+    margin: 3.4%;
+} 

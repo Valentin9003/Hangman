@@ -4,6 +4,5 @@
     border-left-color: red;
     border-top-color: black;
     border-bottom-color: black;
-    width: 30%;
-    height: 30%;
+    max-width: 100%
 }
