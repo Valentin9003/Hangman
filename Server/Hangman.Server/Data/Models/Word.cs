@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hangman.Server.Data.Models
 {
@@ -12,10 +13,7 @@ namespace Hangman.Server.Data.Models
         public string WordContent { get; set; }
 
         [Range(HangmanDataConstants.LevelDifficultyMinRangeValue, HangmanDataConstants.LevelDifficultyMaxRangeValue)]
-        public byte LevelDifficulty { get; set; }
 
-        public User UserId { get; set; }
-
-        public User User { get; set; }
+        public int Level { get; set; }
     }
 }

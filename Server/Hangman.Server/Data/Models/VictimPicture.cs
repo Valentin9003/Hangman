@@ -14,10 +14,5 @@ namespace Hangman.Server.Data.Models
 
         [Range(HangmanDataConstants.ProgressLevelMinRangeValue, HangmanDataConstants.ProgressLevelMaxRangeValue)]
         public int ProgressLevel { get; set; }
-
-        [Required]
-        public string VictimId { get; set; }
-
-        public Victim Victim { get; set; }
     }
 }

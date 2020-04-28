@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Hangman.Server
 {
-    public class AppSettings
+    public static class ProjectConstants
     {
-        public string Secret { get; set; }
+        public const string JWTSecretConfiguration = "Secret";
     }
 }
