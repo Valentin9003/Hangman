@@ -9,6 +9,10 @@ namespace Hangman.Server.Features.Identity
 {
     public class IdentityService : IIdentityService
     {
+        public IdentityService()
+        {
+
+        }
         public string GenerateJwtToken(string userId, string userName, string secret)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
+import { TokenModel } from '../models/TokenModel';
 
 
 @Component({
@@ -12,6 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
    loginForm: FormGroup;
+
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     
     this.loginForm = this.fb.group({
@@ -23,8 +26,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 login(){
-  this.authService.login(this.loginForm.value)
-  this.router.navigate(['localhost:4200']); // TODO: Change Route
+  this.authService.login(this.loginForm.value).subscribe(() =>
+  tap((r: TokenModel) => {
+if(r.Token){
+console.error(r.Token)
+}
+  }))
 }
 
 get username() {

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: "https://localhost:4200/",
+  apiUrl: "https://localhost:44332/",
   gameUrls:{
     getWord: "game/getword",
     changeWord: "game/changeword"

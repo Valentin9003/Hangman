@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WordComponent } from './word/word.component';
 import { VictimPictureComponent } from './victim-picture/victim-picture.component';
 import { UserInfoComponent } from './user-info/user-info.component';
@@ -14,6 +14,8 @@ import { AlphabetComponent } from './alphabet/alphabet.component';
 import { GameComponent } from './game/game.component';
 import { GameStatusComponent } from './game.status/game.status.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import { ErrorInterceptorService } from './services/error-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,18 @@ import { NavigationComponent } from './navigation/navigation.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+ {
+provide: HTTP_INTERCEPTORS,
+useClass: TokenInterceptorService,
+multi: true
+ },
+ {
+  provide: HTTP_INTERCEPTORS,
+  useClass: ErrorInterceptorService,
+  multi: true
+ }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

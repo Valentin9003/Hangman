@@ -15,10 +15,13 @@ namespace Hangman.Server.Infrastructure.Extensions
 
             dbContext.Database.Migrate();
         }
-
-        public static void JwtAuthentication(this IApplicationBuilder app)
-        {
-
-        }
+        public static IApplicationBuilder UseSwaggerUI(this IApplicationBuilder app)
+            => app
+                .UseSwagger()
+                .UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Hangman API");
+                    options.RoutePrefix = string.Empty;
+                });
     }
 }

@@ -16,8 +16,10 @@ namespace Hangman.Server.Data
 
         public const int ProgressLevelMinRangeValue = 1;
 
-        public const int ProgressLevelMaxRangeValue = 1;
+        public const int ProgressLevelMaxRangeValue = 6;
 
         public const int SuffererMaxLength = 10 * 10 * 1024;
+
+        public const string VictimPicturesWebRootFolderNamePathTemplate = "/victimPictures/{i}.png";
     }
 }

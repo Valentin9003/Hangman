@@ -18,10 +18,6 @@ export class GameService {
    return this.http.post(this.getWordUrl, this.prepareTokenToRequest())
   }
 
-  changeWord(): Observable<any> {
-    return this.http.post(this.changeWordUrl, this.prepareTokenToRequest())
-   }
-
   prepareTokenToRequest(): any {
    return { "token": this.authService.getToken()};
   }

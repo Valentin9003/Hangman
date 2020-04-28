@@ -15,13 +15,16 @@ namespace Hangman.Server
         }
 
         public IConfiguration Configuration { get; }
-        
-        public void ConfigureServices(IServiceCollection services) => services   
+
+        public void ConfigureServices(IServiceCollection services) => services
                     .AddDatabase(this.Configuration)
-                    .AddIdentity()
-                    .ConfigureJwtAutentication(this.Configuration)
                     .AddApplicationServices()
-                    .AddControllers();
+                    .AddIdentity()
+                    .AddOptions()
+                    .AddConfiguration(this.Configuration)
+                    .ConfigureJwtAutentication(this.Configuration)
+                    .AddSwagger()
+                    .AddApiControllers();
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -30,22 +33,21 @@ namespace Hangman.Server
                 app.UseDeveloperExceptionPage()
                    .UseDatabaseErrorPage();
             }
-            
-            app.UseHttpsRedirection()
+
+            app.UseSwaggerUI()
                .UseRouting()
+               .UseCors(options =>
+                   options.AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .AllowAnyMethod())
                .UseAuthentication()
                .UseAuthorization()
-               .UseCors(options =>
-               {
-                  options.AllowAnyOrigin()
-                         .AllowAnyHeader()
-                         .AllowAnyMethod();
-               })
                .UseEndpoints(endpoints =>
                {
-                  endpoints.MapControllers();
+                   endpoints.MapControllers();
                })
                .ApplyMigrations();
+               
         }
     }
 }

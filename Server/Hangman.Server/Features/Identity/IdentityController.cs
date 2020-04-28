@@ -7,7 +7,7 @@ using Hangman.Server.Features.Identity;
 using Hangman.Server.Data.Models;
 using Hangman.Server.Features;
 
-namespace Hangman.Server.Controllers
+namespace Hangman.Server.Features.Identity
 {
     public class IdentityController : ApiController
     {
@@ -15,9 +15,9 @@ namespace Hangman.Server.Controllers
         private readonly AppSettings appSettings;
         private readonly IIdentityService identityService;
 
-        public IdentityController(UserManager<User> usermanager, IIdentityService identityService, IOptions<AppSettings> appSettings)
+        public IdentityController(UserManager<User> userManager, IIdentityService identityService, IOptions<AppSettings> appSettings)
         {
-            this.userManager = usermanager;
+            this.userManager = userManager;
             this.appSettings = appSettings.Value;
             this.identityService = identityService;
         }
@@ -33,14 +33,14 @@ namespace Hangman.Server.Controllers
                 return Unauthorized();
             }
 
-            var passwordValid = await userManager.CheckPasswordAsync(user, loginModel.Pasword);
+            var passwordValid = await userManager.CheckPasswordAsync(user, loginModel.Password);
 
             if (!passwordValid)
             {
                 return Unauthorized();
             }
 
-            var token = this.identityService.GenerateJwtToken(
+            var token = identityService.GenerateJwtToken(
                 user.Id,
                 user.UserName,
                 this.appSettings.Secret);
