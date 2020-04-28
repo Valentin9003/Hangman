@@ -1,4 +1,4 @@
-<div *ngIf="isAuthenticated then isAuthenticated else isNotAuthenticated"></div>
+<div *ngIf="(isAuthenticated$ | async) then isAuthenticated else isNotAuthenticated"></div>
 
 <ng-template #isAuthenticated>
 <nav class="navbar navbar-expand-lg navbar-light bg-light"> 

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpResponse } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { map, tap } from 'rxjs/operators';
+import { TokenModel } from '../models/TokenModel';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +14,14 @@ export class AuthService {
   private registerPath = environment.apiUrl + environment.authUrls.register;
   
   private loggedIn = new BehaviorSubject<boolean>(false); 
+  private Token:TokenModel;
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
   constructor(private http: HttpClient, private router: Router) { }
 
-  login(data: any): Observable<any>{
+  login(data: any): Observable<any> {
     this.loggedIn.next(true);
     return this.http.post(this.loginPath, data);
   }

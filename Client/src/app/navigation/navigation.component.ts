@@ -8,15 +8,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-public isAuthenticated: boolean;
-private isAuthenticated$: Observable<boolean>;
+public isAuthenticated$: Observable<boolean>;
 
   constructor(private authService: AuthService) { 
     this.isAuthenticated$ = this.authService.isLoggedIn; 
   }
 
   ngOnInit() {
-    this.isAuthenticated$.subscribe((next) => this.isAuthenticated = next);
+    this.isAuthenticated$.subscribe();
   }
   
   logout() { 
