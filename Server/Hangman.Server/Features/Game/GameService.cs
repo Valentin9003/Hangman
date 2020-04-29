@@ -14,14 +14,59 @@ namespace Hangman.Server.Features.Game
 
         }
 
-        public Task<string> changeWord()
+        public Task<string> ChangeJokers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> ChangeLifes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> ChangeScores()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> ChangeWord()
         {
             return Task.FromResult<string>("ChangeWord");
         }
 
-        public Task<string> getWord()
+        public Task<string> GameStatus()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> GetJokers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> GetLifes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> GetScores()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> GetWord()
         {
             return Task.FromResult<string>("GetWord");
+        }
+
+        public Task<string> Lose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> Win()
+        {
+            throw new NotImplementedException();
         }
     }
 }

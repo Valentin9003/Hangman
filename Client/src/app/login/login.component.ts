@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { TokenModel } from '../models/TokenModel';
 
 
@@ -26,12 +26,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 login(){
-  this.authService.login(this.loginForm.value).subscribe(() =>
-  tap((r: TokenModel) => {
-if(r.Token){
-console.error(r.Token)
-}
-  }))
+  this.authService.login(this.loginForm.value)
+  this.router.navigate(["game"]);
 }
 
 get username() {

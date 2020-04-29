@@ -13,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using Hangman.Server.Features.Identity.Models;
 using System.Configuration;
 using Microsoft.Extensions.Configuration.Binder;
+using Hangman.Server.Features.Game;
 
 namespace Hangman.Server.Infrastructure.Extensions
 {
@@ -41,7 +42,8 @@ namespace Hangman.Server.Infrastructure.Extensions
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            services.AddTransient<IIdentityService, IdentityService>();
+            services.AddTransient<IIdentityService, IdentityService>()
+                    .AddTransient<IGameService, GameService>();
             return services;
         }
 
