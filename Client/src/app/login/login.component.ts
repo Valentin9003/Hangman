@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 login(){
   this.authService.login(this.loginForm.value)
-  this.router.navigate(["game"]);
+ // this.router.navigate(["game"]);
 }
 
 get username() {

@@ -25,8 +25,10 @@ namespace Hangman.Server.Features.Game
 
         Task<string> ChangeScores();
 
-        Task<string> Win();
+        Task<bool> Win();
 
-        Task<string> Lose();
+        Task<bool> Lose();
+
+        Task<bool> NewGame();
     }
 }

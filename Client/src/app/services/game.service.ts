@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
+import { WordModel } from '../models/WordModel';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +20,12 @@ export class GameService {
   private getJokersUrl: string = environment.apiUrl + environment.gameUrls.getWord
   private changeJokersUrl: string = environment.apiUrl + environment.gameUrls.gameStatus;
   private nextWordUrl: string = environment.apiUrl + environment.gameUrls.nextWord;
+  private newGameUrl: string = environment.apiUrl + environment.gameUrls.newGame;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-   getWord(): Observable<any> {
-    return this.http.post(this.getWordUrl, this.prepareTokenToRequest())
+   getWord(): Observable<WordModel> {
+    return this.http.post<WordModel>(this.getWordUrl, this.prepareTokenToRequest())
    }
 
    nextWord(): Observable<any> {
@@ -59,5 +62,9 @@ export class GameService {
 
   prepareTokenToRequest(): any {
    return { "token": this.authService.getToken()};
+  }
+
+  newGame(): Observable<boolean> {
+    return this.http.post<boolean>(this.newGameUrl, this.prepareTokenToRequest());
   }
 }

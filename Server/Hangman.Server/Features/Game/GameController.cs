@@ -6,6 +6,7 @@ using Hangman.Server.Features.Identity.Models;
 using Hangman.Server.Features.Identity;
 using Hangman.Server.Data.Models;
 using Hangman.Server.Features;
+using Hangman.Server.Data;
 
 namespace Hangman.Server.Features.Game
 {
@@ -21,6 +22,7 @@ namespace Hangman.Server.Features.Game
         [Route(nameof(GetWord))]
         public async Task<ActionResult<string>> GetWord(string token)
         {
+            var tt = this.HttpContext;
             return  await gameService.GetWord();
         }
 
@@ -85,6 +87,13 @@ namespace Hangman.Server.Features.Game
         public async Task<ActionResult<string>> Lose(string token)
         {
             return await gameService.ChangeScores();
+        }
+
+        [HttpPost()]
+        [Route(nameof(NewGame))]
+        public async Task<ActionResult<bool>> NewGame(string token)
+        {
+            return await gameService.NewGame();
         }
     }
 }

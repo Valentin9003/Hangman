@@ -21,13 +21,21 @@ export class AuthService {
   }
   constructor(private http: HttpClient, private router: Router) { }
 
-  login(data: any): Observable<any> {
+  login(data: any) {
     this.loggedIn.next(true);
-    return this.http.post(this.loginPath, data);
+     this.http.post(this.loginPath, data).subscribe( (data: TokenModel) =>{
+          if(data.token){
+            this.setToken(data.token);
+            this.router.navigate(["game"]);
+          }
+          else{ 
+          location.reload();
+          }
+    })
   }
 
   register(data:any){
-    return this.http.post(this.registerPath, data)
+    return this.http.post<TokenModel>(this.registerPath, data);
   }
 
   setToken(token: string) {

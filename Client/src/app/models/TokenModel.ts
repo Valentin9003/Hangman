@@ -1,3 +1,4 @@
-export class TokenModel {
-    Token:string
+
+export interface TokenModel {
+    token:string
 }

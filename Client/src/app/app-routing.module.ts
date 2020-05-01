@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { GameComponent } from './game/game.component';
 import { AuthGuardService } from './services/auth.guard.service';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,12 @@ const routes: Routes = [
     path: 'game',
     component: GameComponent, 
     //canActivate:[AuthGuardService]
-  }
+  },
+  {
+    path: 'user',
+    component: UserInfoComponent,
+    //canActivate:[AuthGuardService]
+  },
 ];
 
 @NgModule({
