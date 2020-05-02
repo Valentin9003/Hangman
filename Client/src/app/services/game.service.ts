@@ -25,11 +25,11 @@ export class GameService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
    getWord(): Observable<WordModel> {
-    return this.http.post<WordModel>(this.getWordUrl, this.prepareTokenToRequest())
+    return this.http.get<WordModel>(this.getWordUrl)
    }
 
    nextWord(): Observable<any> {
-    return this.http.post(this.nextWordUrl, this.prepareTokenToRequest())
+    return this.http.get(this.nextWordUrl)
    }
 
    gameStatus(): Observable<any> {
@@ -37,27 +37,27 @@ export class GameService {
    }
 
    getScores(): Observable<any> {
-    return this.http.post(this.getScoresUrl, this.prepareTokenToRequest())
+    return this.http.get(this.getScoresUrl)
    }
 
    changeScores(): Observable<any> {
-    return this.http.post(this.changeScoresUrl, this.prepareTokenToRequest())
+    return this.http.get(this.changeScoresUrl)
    } 
 
    getLifes(): Observable<any> {
-    return this.http.post(this.getLifesUrl, this.prepareTokenToRequest())
+    return this.http.get(this.getLifesUrl)
    }
 
    changeLifes(): Observable<any> {
-    return this.http.post(this.changeLifesUrl, this.prepareTokenToRequest())
+    return this.http.get(this.changeLifesUrl)
    }
 
    getJocker(): Observable<any> {
-    return this.http.post(this.getJokersUrl, this.prepareTokenToRequest())
+    return this.http.get(this.getJokersUrl)
    }
 
    changeJocker(): Observable<any> {
-     return this.http.post(this.changeJokersUrl, this.prepareTokenToRequest())
+     return this.http.get(this.changeJokersUrl)
    }
 
   prepareTokenToRequest(): any {

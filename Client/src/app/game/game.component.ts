@@ -17,10 +17,9 @@ export class GameComponent implements OnInit {
   constructor(private gameService: GameService) { }
 
   ngOnInit() {
-    this.gameService.getWord().subscribe((model: WordModel) =>{
-      map(() => this.word = model.Word)
-    }
-    )
+    this.gameService.getWord().subscribe((word: WordModel) =>{
+      this.word = word.Word
+    })
   }
 
   checkLetter(letter: string){
