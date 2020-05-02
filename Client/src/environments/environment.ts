@@ -7,11 +7,21 @@ export const environment = {
   apiUrl: "https://localhost:44332/",
   gameUrls:{
     getWord: "game/getword",
-    changeWord: "game/changeword"
+    gameStatus: "game/gamestatus",
+    getLifes: "game/getlifes",
+    changeLifes: "game/changelifes", 
+    getJockers: "game/getjocker",
+    changeJockers: "game/getjocker",
+    getScores: "game/getscores",
+    cgangeScores: "game/changescores",
+    nextWord: "game/nextword"
   },
   authUrls:{
    register: "identity/register",
    login: "identity/login"
+  },
+  userInfoUrls:{
+    
   }
 
 };

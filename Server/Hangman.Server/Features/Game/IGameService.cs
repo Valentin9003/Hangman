@@ -7,9 +7,26 @@ namespace Hangman.Server.Features.Game
 {
     public interface IGameService
     {
-       Task<string> getWord();
+        Task<string> GameStatus();
 
-       Task<string> changeWord();
+        Task<string> GetWord();
 
+        Task<string> ChangeWord();
+
+        Task<string> GetLifes();
+
+        Task<string> ChangeLifes(); 
+
+        Task<string> GetJokers();
+
+        Task<string> ChangeJokers();
+
+        Task<string> GetScores();
+
+        Task<string> ChangeScores();
+
+        Task<string> Win();
+
+        Task<string> Lose();
     }
 }

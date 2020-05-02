@@ -1,0 +1,8 @@
+.board{
+    display:inline-block;
+}
+.board>div{
+    display:inline-block;
+    padding: 5px;
+    
+}
