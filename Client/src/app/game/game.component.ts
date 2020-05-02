@@ -12,17 +12,17 @@ import { Observable } from 'rxjs';
 })
 export class GameComponent implements OnInit {
 
-  public word: string;
+  public word: string = "MNOGODYLGAIGOLQMADUMA";
 
   constructor(private gameService: GameService) { }
 
   ngOnInit() {
-    this.gameService.getWord().subscribe((word: WordModel) =>{
-      this.word = word.Word
+    this.gameService.getWord().subscribe((word: WordModel) => {
+      this.word = word.Word; console.log(word)
     })
   }
 
-  checkLetter(letter: string){
+   getLetter(letter: string){
      
   }
 }

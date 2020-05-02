@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Hangman.Server.Features.Game
 {
     [Authorize]
-    public class GameController : ImageController
+    public class GameController : ApiController
     {
         private readonly IGameService gameService;
         public GameController(IGameService gameService)

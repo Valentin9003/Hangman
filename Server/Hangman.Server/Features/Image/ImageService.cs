@@ -1,6 +1,7 @@
 ﻿using Hangman.Server.Data;
 using Hangman.Server.Data.Models;
 using Hangman.Server.Features.Identity;
+using Hangman.Server.Features.Image.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -24,21 +25,24 @@ namespace Hangman.Server.Features.Image
             this.identityService = identityService;
         }
 
-        public async Task<byte[]> GetVictimPicture()
+        public async Task<ImageResponseModel> GetVictimPicture()
         {
             var userId = await identityService
                 .GetCurrentUserId();
 
             var userLevel = await context.Users
                 .Where(u => u.Id == userId)
-                .Select(l => l.Level)
+                .Select(l =>l.Level)
                 .FirstOrDefaultAsync();
 
             var level = int.Parse(userLevel);
 
             var picture = await this.context.VictimPicture
                 .Where(vp => vp.ProgressLevel == level)
-                .Select(p => p.Sufferer)
+                .Select(p => new ImageResponseModel 
+                { 
+                    VictimPicture = p.Sufferer
+                })
                 .FirstOrDefaultAsync();
 
             return picture;
