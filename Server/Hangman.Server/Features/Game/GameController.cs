@@ -1,16 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
-using Hangman.Server.Features.Identity.Models;
-using Hangman.Server.Features.Identity;
-using Hangman.Server.Data.Models;
-using Hangman.Server.Features;
-using Hangman.Server.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hangman.Server.Features.Game
 {
-    public class GameController : ApiController
+    [Authorize]
+    public class GameController : ImageController
     {
         private readonly IGameService gameService;
         public GameController(IGameService gameService)
@@ -18,7 +13,7 @@ namespace Hangman.Server.Features.Game
             this.gameService = gameService;
         }
 
-        [HttpPost()]
+        [HttpGet()]
         [Route(nameof(GetWord))]
         public async Task<ActionResult<string>> GetWord(string token)
         {
@@ -28,65 +23,65 @@ namespace Hangman.Server.Features.Game
 
         [HttpPost()]
         [Route(nameof(GameStatus))]
-        public async Task<ActionResult<string>> GameStatus()
+        public async Task<ActionResult<bool>> GameStatus()
         {
             return await gameService.GameStatus();
         }
 
-        [HttpPost()]
+        [HttpGet()]
         [Route(nameof(GetLifes))]
-        public async Task<ActionResult<string>> GetLifes (string token)
+        public async Task<ActionResult<int>> GetLifes ()
         {
             return await gameService.GetLifes();
         }
 
         [HttpPost()]
         [Route(nameof(ChangeLifes))]
-        public async Task<ActionResult<string>> ChangeLifes(string token)
+        public async Task<ActionResult<int>> ChangeLifes()
         {
             return await gameService.ChangeLifes();
         }
 
-        [HttpPost()]
+        [HttpGet()]
         [Route(nameof(GetJokers))]
-        public async Task<ActionResult<string>> GetJokers(string token)
+        public async Task<ActionResult<int>> GetJokers(int token)
         {
             return await gameService.GetJokers();
         }
 
-        [HttpPost()]
+        [HttpGet()]
         [Route(nameof(ChangeJokers))]
-        public async Task<ActionResult<string>> ChangeJokers(string token)
+        public async Task<ActionResult<int>> ChangeJokers(string token)
         {
             return await gameService.ChangeJokers();
         }
 
-        [HttpPost()]
+        [HttpGet()]
         [Route(nameof(GetScores))]
-        public async Task<ActionResult<string>> GetScores(string token)
+        public async Task<ActionResult<int>> GetScores(string token)
         {
             return await gameService.GetScores();
         }
 
-        [HttpPost()]
+        [HttpGet()]
         [Route(nameof(ChangeScores))]
-        public async Task<ActionResult<string>> ChangeScores(string token)
+        public async Task<ActionResult<int>> ChangeScores(int scores)
         {
-            return await gameService.ChangeScores();
+            return await gameService.ChangeScores(scores);
         }
 
-        [HttpPost()]
+        [HttpGet()]
         [Route(nameof(Win))]
-        public async Task<ActionResult<string>> Win(string token)
+        public async Task<ActionResult<bool>> Win()
         {
-            return await gameService.GetScores();
+            return await gameService.NewGame();
         }
 
-        [HttpPost()]
+        [HttpGet()]
         [Route(nameof(Lose))]
-        public async Task<ActionResult<string>> Lose(string token)
+        public async Task<ActionResult<int>> Lose(int scores)
         {
-            return await gameService.ChangeScores();
+            return await gameService.ChangeScores(scores);
         }
 
         [HttpPost()]

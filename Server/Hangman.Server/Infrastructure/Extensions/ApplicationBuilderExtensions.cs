@@ -20,7 +20,7 @@ namespace Hangman.Server.Infrastructure.Extensions
                 .UseSwagger()
                 .UseSwaggerUI(options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Hangman API");
+                    options.SwaggerEndpoint(ProjectConstants.SwaggerEndpoint, ProjectConstants.SwaggerApiTitle);
                     options.RoutePrefix = string.Empty;
                 });
     }
