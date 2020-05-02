@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
+import { WordModel } from '../models/WordModel';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,15 +20,16 @@ export class GameService {
   private getJokersUrl: string = environment.apiUrl + environment.gameUrls.getWord
   private changeJokersUrl: string = environment.apiUrl + environment.gameUrls.gameStatus;
   private nextWordUrl: string = environment.apiUrl + environment.gameUrls.nextWord;
+  private newGameUrl: string = environment.apiUrl + environment.gameUrls.newGame;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-   getWord(): Observable<any> {
-    return this.http.post(this.getWordUrl, this.prepareTokenToRequest())
+   getWord(): Observable<WordModel> {
+    return this.http.get<WordModel>(this.getWordUrl)
    }
 
    nextWord(): Observable<any> {
-    return this.http.post(this.nextWordUrl, this.prepareTokenToRequest())
+    return this.http.get(this.nextWordUrl)
    }
 
    gameStatus(): Observable<any> {
@@ -34,30 +37,34 @@ export class GameService {
    }
 
    getScores(): Observable<any> {
-    return this.http.post(this.getScoresUrl, this.prepareTokenToRequest())
+    return this.http.get(this.getScoresUrl)
    }
 
    changeScores(): Observable<any> {
-    return this.http.post(this.changeScoresUrl, this.prepareTokenToRequest())
+    return this.http.get(this.changeScoresUrl)
    } 
 
    getLifes(): Observable<any> {
-    return this.http.post(this.getLifesUrl, this.prepareTokenToRequest())
+    return this.http.get(this.getLifesUrl)
    }
 
    changeLifes(): Observable<any> {
-    return this.http.post(this.changeLifesUrl, this.prepareTokenToRequest())
+    return this.http.get(this.changeLifesUrl)
    }
 
    getJocker(): Observable<any> {
-    return this.http.post(this.getJokersUrl, this.prepareTokenToRequest())
+    return this.http.get(this.getJokersUrl)
    }
 
    changeJocker(): Observable<any> {
-     return this.http.post(this.changeJokersUrl, this.prepareTokenToRequest())
+     return this.http.get(this.changeJokersUrl)
    }
 
   prepareTokenToRequest(): any {
    return { "token": this.authService.getToken()};
+  }
+
+  newGame(): Observable<boolean> {
+    return this.http.post<boolean>(this.newGameUrl, this.prepareTokenToRequest());
   }
 }

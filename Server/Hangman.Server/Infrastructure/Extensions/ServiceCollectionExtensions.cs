@@ -10,10 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
-using Hangman.Server.Features.Identity.Models;
-using System.Configuration;
-using Microsoft.Extensions.Configuration.Binder;
 using Hangman.Server.Features.Game;
+using Hangman.Server.Features.Image;
 
 namespace Hangman.Server.Infrastructure.Extensions
 {
@@ -22,7 +20,7 @@ namespace Hangman.Server.Infrastructure.Extensions
         public static IServiceCollection AddDatabase(
             this IServiceCollection services,
             IConfiguration configuration) => services.AddDbContext<HangmanDbContext>(options =>
-            options.UseSqlServer( configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer( configuration.GetDefaultConnectionString()));
 
         public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
@@ -43,10 +41,12 @@ namespace Hangman.Server.Infrastructure.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddTransient<IIdentityService, IdentityService>()
-                    .AddTransient<IGameService, GameService>();
+                    .AddTransient<IIdentityServiceHelper, IdentityServiceHelper>()
+                    .AddTransient<IGameService, GameService>()
+                    .AddTransient<IImageService,ImageService>();
+
             return services;
         }
-
 
         public static IServiceCollection ConfigureJwtAutentication(this IServiceCollection services, IConfiguration configuration)
         {
@@ -70,6 +70,7 @@ namespace Hangman.Server.Infrastructure.Extensions
                     ValidateAudience = false
                 };
             });
+
             return services;
         }
 
@@ -80,14 +81,15 @@ namespace Hangman.Server.Infrastructure.Extensions
                     "v1",
                     new OpenApiInfo
                     {
-                        Title = "Hangman API",
-                        Version = "v1"
+                        Title = ProjectConstants.SwaggerApiTitle,
+                        Version = ProjectConstants.SwaggerApiVersion
                     });
             });
         public static void AddApiControllers (this IServiceCollection services) =>
         services.AddControllers(options => options.Filters.Add<ModelOrNotFoundActionFilter>());
 
-        public static IServiceCollection AddConfiguration (this IServiceCollection services, IConfiguration configuration) =>
-        services.Configure<AppSettings>(options => configuration.GetSection("AppSettings").Bind(options));
+        public static IServiceCollection AddConfiguration (this IServiceCollection services, IConfiguration configuration)
+            => services.Configure<AppSettings>(options => 
+            configuration.GetSection(ProjectConstants.AppSettingsConfigSection).Bind(options));
     }
 }

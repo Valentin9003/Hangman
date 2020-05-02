@@ -14,16 +14,19 @@ export const environment = {
     changeJockers: "game/getjocker",
     getScores: "game/getscores",
     cgangeScores: "game/changescores",
-    nextWord: "game/nextword"
+    nextWord: "game/nextword",
+    newGame: "game/newgame"
   },
   authUrls:{
    register: "identity/register",
    login: "identity/login"
   },
   userInfoUrls:{
-    
+    changePassword: "identity/changepassword",
+    changeUsername: "identity/changeusername",
+    getPassword: "identity/GetPassword",
+    getUsername: "identity/GetUsername"
   }
-
 };
 
 /*

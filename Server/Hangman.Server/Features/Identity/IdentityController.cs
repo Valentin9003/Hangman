@@ -1,41 +1,36 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Hangman.Server.Features.Identity.Models;
-using Hangman.Server.Features.Identity;
 using Hangman.Server.Data.Models;
-using Hangman.Server.Features;
 
 namespace Hangman.Server.Features.Identity
 {
     public class IdentityController : ApiController
     {
-        private readonly UserManager<User> userManager;
         private readonly AppSettings appSettings;
         private readonly IIdentityService identityService;
 
-        public IdentityController(UserManager<User> userManager, IIdentityService identityService, IOptions<AppSettings> appSettings)
+        public IdentityController(IIdentityService identityService, IOptions<AppSettings> appSettings)
         {
-            this.userManager = userManager;
             this.appSettings = appSettings.Value;
             this.identityService = identityService;
         }
-
+       
         [HttpPost]
         [Route(nameof(Login))]
         public async Task<ActionResult<LoginResponseModel>> Login(LoginRequestModel loginModel)
         {
-            var user = await userManager.FindByNameAsync(loginModel.Username);
-
+            var user = await GetCurrentUser();
+           
             if (user == null)
             {
                 return Unauthorized();
             }
 
-            var passwordValid = await userManager.CheckPasswordAsync(user, loginModel.Password);
+            var passwordIsValid = await CheckPasswordAsync(user, loginModel.Password);
 
-            if (!passwordValid)
+            if (!passwordIsValid)
             {
                 return Unauthorized();
             }
@@ -61,7 +56,7 @@ namespace Hangman.Server.Features.Identity
                 Email = registerModel.Email
             };
 
-          var result =  await userManager.CreateAsync(user, registerModel.Password);
+          var result =  await CreateUserAsync(user, registerModel.Password);
 
             if (result.Succeeded)
             {

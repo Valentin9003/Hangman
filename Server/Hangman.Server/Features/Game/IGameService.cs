@@ -1,32 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Hangman.Server.Data.Models;
 using System.Threading.Tasks;
 
 namespace Hangman.Server.Features.Game
 {
     public interface IGameService
     {
-        Task<string> GameStatus();
+        Task<bool> GameStatus();
 
         Task<string> GetWord();
 
         Task<string> ChangeWord();
 
-        Task<string> GetLifes();
+        Task<int> GetLifes();
 
-        Task<string> ChangeLifes(); 
+        Task<int> ChangeLifes(); 
 
-        Task<string> GetJokers();
+        Task<int> GetJokers();
 
-        Task<string> ChangeJokers();
+        Task<int> ChangeJokers();
 
-        Task<string> GetScores();
+        Task<int> GetScores();
 
-        Task<string> ChangeScores();
+        Task<int> ChangeScores(int scores);
 
-        Task<string> Win();
+        Task<bool> Win();
 
-        Task<string> Lose();
+        Task<bool> Lose();
+
+        Task<bool> NewGame();
+
     }
 }

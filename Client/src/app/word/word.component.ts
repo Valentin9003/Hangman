@@ -7,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class WordComponent implements OnInit {
 
- word: string[] = ['s', 'f','s', 'f','s', 'f','s', 'f','s', 'f','s', 'f','s', 'f','s', 'f','s', 'f','s', 'f'];
-ob
+ @Input() public word: string = "bdccccccccbdhsjfffffffffffr";
+ 
   constructor() { }
 
   ngOnInit(): void {
