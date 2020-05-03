@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class WordComponent implements OnInit {
 
- @Input() public word: string = "bdccccccccbdhsjfffffffffffr";
+ @Input() public word: string;
  
   constructor() { }
 

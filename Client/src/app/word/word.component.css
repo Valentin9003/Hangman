@@ -4,6 +4,8 @@
 }
 
 .word{
+font-size: 3em;
+font-style: italic;
 background-color: white;
 color: black;
 }

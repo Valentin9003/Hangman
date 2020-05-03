@@ -24,7 +24,7 @@ export class GameService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-   getWord(): Observable<WordModel> {
+   getWord(): Observable<any> {
     return this.http.get<WordModel>(this.getWordUrl)
    }
 
@@ -66,5 +66,9 @@ export class GameService {
 
   newGame(): Observable<boolean> {
     return this.http.post<boolean>(this.newGameUrl, this.prepareTokenToRequest());
+  }
+
+  Lose(): void {
+   
   }
 }
