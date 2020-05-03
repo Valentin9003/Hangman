@@ -1,4 +1,4 @@
 
 export interface WordModel{
-    Word: string;
+    word: string;
 }
