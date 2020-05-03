@@ -1,0 +1,25 @@
+:host>footer{
+background-color: black;
+color:greenyellow;
+
+}
+:host>footer>p{
+    display: inline-flex;
+    flex-wrap: nowrap;
+}
+
+:host>footer>.footer-left{
+   color: white;
+}
+
+:host>footer>.footer-right{
+    color: red;
+ }
+
+ :host>footer>.footer-center{
+    color: green;
+    
+ }
+
+ :host>footer>.footer-center.footer-right.footer-left{
+ }
