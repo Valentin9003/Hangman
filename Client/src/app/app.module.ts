@@ -17,6 +17,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ErrorInterceptorService } from './services/error-interceptor.service';
 import { UnauthorizedNavbarMenuComponent } from './unauthorized-navbar-menu/unauthorized-navbar-menu.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UnauthorizedNavbarMenuComponent } from './unauthorized-navbar-menu/unau
     GameComponent,
     GameStatusComponent,
     NavigationComponent,
-    UnauthorizedNavbarMenuComponent
+    UnauthorizedNavbarMenuComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
