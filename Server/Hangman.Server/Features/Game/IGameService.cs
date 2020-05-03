@@ -1,4 +1,5 @@
 ﻿using Hangman.Server.Data.Models;
+using Hangman.Server.Features.Game.Models;
 using System.Threading.Tasks;
 
 namespace Hangman.Server.Features.Game
@@ -7,7 +8,7 @@ namespace Hangman.Server.Features.Game
     {
         Task<bool> GameStatus();
 
-        Task<string> GetWord();
+        Task<WordResponseModel> GetWord();
 
         Task<string> ChangeWord();
 

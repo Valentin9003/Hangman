@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hangman.Server.Data;
 using Hangman.Server.Data.Models;
+using Hangman.Server.Features.Game.Models;
 using Hangman.Server.Features.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -143,7 +144,7 @@ namespace Hangman.Server.Features.Game
             return int.Parse((await this.identityService.GetCurrentUser()).Level);
         }
 
-        public async Task<string> GetWord()
+        public async Task<WordResponseModel> GetWord()
         {
             var userLevel = await this.gameServiceHelper.GetUserLevel();
 
@@ -155,7 +156,10 @@ namespace Hangman.Server.Features.Game
             var word = await this.context
                 .Words
                 .Where(w => w.Level == int.Parse(userLevel))
-                .Select(w => w.WordContent)
+                .Select(w => new WordResponseModel
+                {
+                    Word = w.WordContent
+                })
                 .FirstOrDefaultAsync();
 
             if (word == null)
