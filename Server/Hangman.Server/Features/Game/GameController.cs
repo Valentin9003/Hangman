@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Hangman.Server.Features.Game.Models;
 
 namespace Hangman.Server.Features.Game
 {
@@ -15,9 +16,8 @@ namespace Hangman.Server.Features.Game
 
         [HttpGet()]
         [Route(nameof(GetWord))]
-        public async Task<ActionResult<string>> GetWord(string token)
+        public async Task<ActionResult<WordResponseModel>> GetWord(string token)
         {
-            var tt = this.HttpContext;
             return  await gameService.GetWord();
         }
 

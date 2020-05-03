@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Hangman.Server.Features.Identity.Models;
 using Hangman.Server.Data.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Hangman.Server.Features.Identity
 {
@@ -10,25 +11,29 @@ namespace Hangman.Server.Features.Identity
     {
         private readonly AppSettings appSettings;
         private readonly IIdentityService identityService;
+        private readonly UserManager<User> userManager;
 
-        public IdentityController(IIdentityService identityService, IOptions<AppSettings> appSettings)
+        public IdentityController(IIdentityService identityService, IOptions<AppSettings> appSettings, UserManager<User> userManager)
         {
             this.appSettings = appSettings.Value;
             this.identityService = identityService;
+            this.userManager = userManager;
         }
        
         [HttpPost]
         [Route(nameof(Login))]
         public async Task<ActionResult<LoginResponseModel>> Login(LoginRequestModel loginModel)
         {
-            var user = await GetCurrentUser();
+            var user = await userManager
+                .FindByNameAsync(loginModel.Username);
            
             if (user == null)
             {
                 return Unauthorized();
             }
 
-            var passwordIsValid = await CheckPasswordAsync(user, loginModel.Password);
+            var passwordIsValid = await this.userManager
+                .CheckPasswordAsync(user, loginModel.Password);
 
             if (!passwordIsValid)
             {
@@ -56,7 +61,8 @@ namespace Hangman.Server.Features.Identity
                 Email = registerModel.Email
             };
 
-          var result =  await CreateUserAsync(user, registerModel.Password);
+          var result =  await this.userManager
+                .CreateAsync(user, registerModel.Password);
 
             if (result.Succeeded)
             {
