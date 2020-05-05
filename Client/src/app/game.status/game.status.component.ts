@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GameService } from '../services/game.service';
+import { JokerModel } from '../models/jokerModel';
+import { ScoreModel } from '../models/ScoreModel';
+import { LifeModel } from '../models/LifeModel';
 
 @Component({
   selector: 'game-status',
@@ -8,50 +11,33 @@ import { GameService } from '../services/game.service';
 })
 export class GameStatusComponent implements OnInit {
 
- @Input() jokers:string;
- @Input() lifes:string;
- @Input() scores:string;
+ @Input() jokers:number;
+ @Input() lifes:number;
+ @Input() scores:number;
   constructor(private gameService: GameService) { }
 
   ngOnInit() {
     this.getJokers();
     this.getLifes();
-    this.getScores();
+    this.getScores(); console.log(this.lifes + "  Lifes (GameStatus)")
   }
   
 getJokers(){
-this.gameService.getJocker().subscribe(data => {
-  this.jokers = data;
+this.gameService.getJocker().subscribe((data: JokerModel) => {
+  this.jokers = data.jokers;
 })
 }
 
-changeJokers(){
-  this.gameService.changeJocker().subscribe(data => {
-    this.jokers = data;
-  })
-}
-
 getScores(){
-  this.gameService.getScores().subscribe(data => {
-    this.scores = data;
-  })
-}
-
-changeScores(){
-  this.gameService.changeScores().subscribe(data => {
-    this.scores = data;
+  this.gameService.getScores().subscribe((data: ScoreModel) => {
+    this.scores = data.scores;
+    console.log(this.scores)
   })
 }
 
 getLifes(){
-  this.gameService.getLifes().subscribe(data => {
-    this.lifes = data;
-  })
-}
-
-changeLifes(){
-  this.gameService.changeLifes().subscribe(data => {
-    this.lifes = data;
+  this.gameService.getLifes().subscribe((data: LifeModel) => {
+    this.lifes = data.lifes;
   })
 }
 }

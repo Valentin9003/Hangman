@@ -10,11 +10,11 @@ export const environment = {
     gameStatus: "game/gamestatus",
     getLifes: "game/getlifes",
     changeLifes: "game/changelifes", 
-    getJockers: "game/getjocker",
-    changeJockers: "game/getjocker",
+    getJockers: "game/getjokers",
+    changeJockers: "game/getjokers",
     getScores: "game/getscores",
-    cgangeScores: "game/changescores",
-    nextWord: "game/nextword",
+    changeScores: "game/changescores",
+    getNextWord: "game/getnextword",
     newGame: "game/newgame"
   },
   authUrls:{

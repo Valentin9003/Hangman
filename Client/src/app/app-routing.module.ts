@@ -7,6 +7,16 @@ import { AuthGuardService } from './services/auth.guard.service';
 import { UserInfoComponent } from './user-info/user-info.component';
 
 const routes: Routes = [
+  // {
+  //   path: '',
+  //   redirectTo: '/game',
+  //   pathMatch: 'full'
+  // },
+  {
+    path: 'game',
+    component: GameComponent,
+    canActivate:[AuthGuardService]
+  },
   {
     path: 'login',
     component: LoginComponent
@@ -16,14 +26,9 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'game',
-    component: GameComponent, 
-    //canActivate:[AuthGuardService]
-  },
-  {
     path: 'user',
     component: UserInfoComponent,
-    //canActivate:[AuthGuardService]
+    canActivate:[AuthGuardService]
   },
 ];
 

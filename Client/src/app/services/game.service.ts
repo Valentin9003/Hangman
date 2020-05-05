@@ -5,6 +5,9 @@ import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { WordModel } from '../models/WordModel';
 import { map } from 'rxjs/operators';
+import { ScoreModel } from '../models/ScoreModel';
+import { LifeModel } from '../models/LifeModel';
+import { JokerModel } from '../models/jokerModel';
 
 @Injectable({
   providedIn: 'root'
@@ -13,51 +16,51 @@ export class GameService {
 
   private getWordUrl: string = environment.apiUrl + environment.gameUrls.getWord
   private gameStatusUrl: string = environment.apiUrl + environment.gameUrls.gameStatus;
-  private getScoresUrl: string = environment.apiUrl + environment.gameUrls.getWord
-  private changeScoresUrl: string = environment.apiUrl + environment.gameUrls.gameStatus;
-  private getLifesUrl: string = environment.apiUrl + environment.gameUrls;
-  private changeLifesUrl: string = environment.apiUrl + environment.gameUrls.gameStatus;
-  private getJokersUrl: string = environment.apiUrl + environment.gameUrls.getWord
-  private changeJokersUrl: string = environment.apiUrl + environment.gameUrls.gameStatus;
-  private nextWordUrl: string = environment.apiUrl + environment.gameUrls.nextWord;
+  private getScoresUrl: string = environment.apiUrl + environment.gameUrls.getScores
+  private changeScoresUrl: string = environment.apiUrl + environment.gameUrls.changeScores;
+  private getLifesUrl: string = environment.apiUrl + environment.gameUrls.getLifes;
+  private changeLifesUrl: string = environment.apiUrl + environment.gameUrls.changeLifes;
+  private getJokersUrl: string = environment.apiUrl + environment.gameUrls.getJockers
+  private changeJokersUrl: string = environment.apiUrl + environment.gameUrls.changeJockers;
+  private getNextWordUrl: string = environment.apiUrl + environment.gameUrls.getNextWord;
   private newGameUrl: string = environment.apiUrl + environment.gameUrls.newGame;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-   getWord(): Observable<any> {
+   getWord(): Observable<WordModel> {
     return this.http.get<WordModel>(this.getWordUrl)
    }
 
-   nextWord(): Observable<any> {
-    return this.http.get(this.nextWordUrl)
+   getNextWord(): Observable<WordModel> {
+    return this.http.get<WordModel>(this.getNextWordUrl)
    }
 
    gameStatus(): Observable<any> {
     return this.http.post(this.gameStatusUrl, this.prepareTokenToRequest())
    }
 
-   getScores(): Observable<any> {
-    return this.http.get(this.getScoresUrl)
+   getScores(): Observable<ScoreModel> {
+    return this.http.get<ScoreModel>(this.getScoresUrl)
    }
 
-   changeScores(): Observable<any> {
-    return this.http.get(this.changeScoresUrl)
+   changeScores(): Observable<ScoreModel> {
+    return this.http.get<ScoreModel>(this.changeScoresUrl)
    } 
 
-   getLifes(): Observable<any> {
-    return this.http.get(this.getLifesUrl)
+   getLifes(): Observable<LifeModel> {
+    return this.http.get<LifeModel>(this.getLifesUrl)
    }
 
-   changeLifes(): Observable<any> {
-    return this.http.get(this.changeLifesUrl)
+   changeLifes(): Observable<LifeModel> {
+    return this.http.get<LifeModel>(this.changeLifesUrl)
    }
 
-   getJocker(): Observable<any> {
-    return this.http.get(this.getJokersUrl)
+   getJocker(): Observable<JokerModel> {
+    return this.http.get<JokerModel>(this.getJokersUrl)
    }
 
-   changeJocker(): Observable<any> {
-     return this.http.get(this.changeJokersUrl)
+   changeJocker(): Observable<JokerModel> {
+     return this.http.get<JokerModel>(this.changeJokersUrl)
    }
 
   prepareTokenToRequest(): any {
