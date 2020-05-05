@@ -8,5 +8,7 @@ namespace Hangman.Server.Features.Game.Models
     public class WordResponseModel
     {
         public string Word { get; set; }
+
+        public bool Win { get; set; } = false;
     }
 }

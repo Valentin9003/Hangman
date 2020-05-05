@@ -7,6 +7,7 @@ using Hangman.Server.Features.Game.Models;
 using Hangman.Server.Features.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hangman.Server.Features.Game
@@ -28,7 +29,7 @@ namespace Hangman.Server.Features.Game
             this.gameServiceHelper = gameServiceHelper;
         }
 
-        public async Task<int> ChangeJokers()
+        public async Task<JokersResponseModel> ChangeJokers()
         {
             var userId = await this.identityService.GetCurrentUserId();
 
@@ -40,19 +41,27 @@ namespace Hangman.Server.Features.Game
 
             if (jokers <= 0)
             {
-                return -1;
+                return new JokersResponseModel
+                {
+                    Jokers = 0,
+                    HaveJokers = false
+                };
             }
 
-            jokers--;
+            --jokers;
 
             user.Jokers = jokers;
 
             await context.SaveChangesAsync();
 
-            return jokers;
+            return new JokersResponseModel
+            {
+                Jokers = jokers,
+                HaveJokers = true
+            };
         }
 
-        public async Task<int> ChangeLifes()
+        public async Task<LifesResponseModel> ChangeLifes()
         {
             var userId = await this.identityService.GetCurrentUserId();
 
@@ -63,22 +72,30 @@ namespace Hangman.Server.Features.Game
             {
                 await Lose();
 
-                return 0;
+                return new LifesResponseModel
+                {
+                    Lifes = 0,
+                    Lose = true
+                };
             }
             else
             {
-                var lives = user.Lives;
-                lives--;
+                var lifes = user.Lives;
+                lifes--;
 
-                user.Lives = lives;
+                user.Lives = lifes;
 
                 context.SaveChanges();
 
-                return lives;
+                return new LifesResponseModel
+                {
+                    Lifes = lifes,
+                    Lose = false
+                };
             }
         }
 
-        public async Task<int> ChangeScores(int scores)
+        public async Task<ScoresResponseModel> ChangeScores()
         {
             var userId = await this.identityService
                 .GetCurrentUserId();
@@ -87,85 +104,105 @@ namespace Hangman.Server.Features.Game
                 .Where(u => u.Id == userId)
                 .FirstOrDefault();
 
-            var newScores = user.Scores + scores;
+            var newScores = user.Scores + 1;
 
             user.Scores = newScores;
 
-            return newScores;
+            context.SaveChanges();
+
+            return new ScoresResponseModel
+            {
+                Scores = newScores
+            };
         }
 
-        public async Task<string> ChangeWord()
-        {
-            var userId = await this.identityService.GetCurrentUserId();
-
-            var user = context.Users 
-                .Where(u => u.Id == userId)
-                .FirstOrDefault();
-
-            var nextLevel = gameServiceHelper
-                .GetNextLevel(user.Level);
-
-            var existNextLevel = await gameServiceHelper
-                .CheckExistNextLevel(nextLevel);
-
-            if (existNextLevel)
-            {
-                user.Level = nextLevel.ToString();
-
-                return (await context.Words
-                    .Where(w => w.Level == nextLevel)  
-                    .Select(c => c.WordContent) 
-                    .FirstOrDefaultAsync());
-            }
-            else
-            {
-                await Win();
-                return "YOU WIN";
-            }
-        }
 
         public async Task<bool> GameStatus()
         {
             return (await this.identityService.GetCurrentUser()).Level == "1" ? true : false;
         }
 
-        public async Task<int> GetJokers()
+        public async Task<JokersResponseModel> GetJokers()
         {
-            return (await this.identityService.GetCurrentUser()).Jokers;
+            return new JokersResponseModel
+            {
+                Jokers = (await this.identityService.GetCurrentUser()).Jokers,
+                HaveJokers = true
+            };
+
+            
         }
 
-        public async Task<int> GetLifes()
+        public async Task<LifesResponseModel> GetLifes()
         {
-            return (await this.identityService.GetCurrentUser()).Scores;
+            return new LifesResponseModel
+            {
+                Lifes = (await this.identityService.GetCurrentUser()).Lives,
+                Lose = false
+            }; 
         }
 
-        public async Task<int> GetScores()
+        public async Task<WordResponseModel> GetNextWord()
         {
-            return int.Parse((await this.identityService.GetCurrentUser()).Level);
+
+            var userLevel = await this.gameServiceHelper.GetUserLevel();
+            
+            int.TryParse(userLevel, out int parsedUserLevel);
+
+            var nextLevel = this.gameServiceHelper.GetNextLevel(userLevel);
+
+            var existNextLevel = await this.gameServiceHelper.CheckExistNextLevel(nextLevel);
+
+
+            if (!existNextLevel)
+            {
+               await this.Win();
+
+                return new WordResponseModel
+                {
+                    Word = "YOU WIN",
+                    Win = true
+                };
+            }
+
+            var word = await this.context
+                .Words
+                .Where(w => w.Level == nextLevel)
+                .Select(w => new WordResponseModel
+                {
+                    Word = w.WordContent,
+                    Win = false
+                     
+                })
+                .FirstOrDefaultAsync();
+
+            await this.gameServiceHelper.LevelUp();
+
+            return word;
+        }
+
+    public async Task<ScoresResponseModel> GetScores()
+        {
+            return new ScoresResponseModel
+            {
+                Scores = int.Parse((await this.identityService.GetCurrentUser()).Level)
+            };
         }
 
         public async Task<WordResponseModel> GetWord()
         {
             var userLevel = await this.gameServiceHelper.GetUserLevel();
 
-            if (userLevel == null)
-            {
-                throw new ArgumentNullException("UserLevel value not found in table 'User'");
-            }
-
             var word = await this.context
                 .Words
                 .Where(w => w.Level == int.Parse(userLevel))
                 .Select(w => new WordResponseModel
                 {
-                    Word = w.WordContent
+                    Word = w.WordContent,
+                    Win = false
                 })
                 .FirstOrDefaultAsync();
 
-            if (word == null)
-            {
-                throw new ArgumentNullException("'Word' not found in table 'User'");
-            }
             return word;
         }
 
@@ -188,6 +225,9 @@ namespace Hangman.Server.Features.Game
             }
 
             user.Level = "1";
+            user.Lives = 6;
+            user.Jokers = 3;
+            user.Scores = 0;
 
             await context.SaveChangesAsync();
 
@@ -195,8 +235,7 @@ namespace Hangman.Server.Features.Game
         }
 
         public async Task<bool> Win()
-        {
-            return await this.NewGame();
-        }
+           => await this.NewGame();
+        
     }
 }

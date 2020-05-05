@@ -1,5 +1,6 @@
 ﻿using Hangman.Server.Data.Models;
 using Hangman.Server.Features.Game.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Hangman.Server.Features.Game
@@ -10,25 +11,23 @@ namespace Hangman.Server.Features.Game
 
         Task<WordResponseModel> GetWord();
 
-        Task<string> ChangeWord();
+        Task<LifesResponseModel> GetLifes();
 
-        Task<int> GetLifes();
+        Task<LifesResponseModel> ChangeLifes(); 
 
-        Task<int> ChangeLifes(); 
+        Task<JokersResponseModel> GetJokers();
 
-        Task<int> GetJokers();
+        Task<JokersResponseModel> ChangeJokers();
 
-        Task<int> ChangeJokers();
+        Task<ScoresResponseModel> GetScores();
 
-        Task<int> GetScores();
-
-        Task<int> ChangeScores(int scores);
+        Task<ScoresResponseModel> ChangeScores();
 
         Task<bool> Win();
 
         Task<bool> Lose();
 
         Task<bool> NewGame();
-
+        Task<WordResponseModel> GetNextWord();
     }
 }

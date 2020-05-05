@@ -9,5 +9,7 @@ namespace Hangman.Server.Features.Game
         int GetNextLevel(string level);
 
         Task<string> GetUserLevel();
+
+        Task<int> LevelUp();
     }
 }

@@ -16,9 +16,16 @@ namespace Hangman.Server.Features.Game
 
         [HttpGet()]
         [Route(nameof(GetWord))]
-        public async Task<ActionResult<WordResponseModel>> GetWord(string token)
+        public async Task<ActionResult<WordResponseModel>> GetWord()
         {
             return  await gameService.GetWord();
+        }
+
+        [HttpGet()]
+        [Route(nameof(GetNextWord))]
+        public async Task<ActionResult<WordResponseModel>> GetNextWord()
+        {
+            return await gameService.GetNextWord();
         }
 
         [HttpPost()]
@@ -30,44 +37,44 @@ namespace Hangman.Server.Features.Game
 
         [HttpGet()]
         [Route(nameof(GetLifes))]
-        public async Task<ActionResult<int>> GetLifes ()
+        public async Task<ActionResult<LifesResponseModel>> GetLifes ()
         {
             return await gameService.GetLifes();
         }
 
-        [HttpPost()]
+        [HttpGet()]
         [Route(nameof(ChangeLifes))]
-        public async Task<ActionResult<int>> ChangeLifes()
+        public async Task<ActionResult<LifesResponseModel>> ChangeLifes()
         {
             return await gameService.ChangeLifes();
         }
 
         [HttpGet()]
         [Route(nameof(GetJokers))]
-        public async Task<ActionResult<int>> GetJokers(int token)
+        public async Task<ActionResult<JokersResponseModel>> GetJokers()
         {
             return await gameService.GetJokers();
         }
 
         [HttpGet()]
         [Route(nameof(ChangeJokers))]
-        public async Task<ActionResult<int>> ChangeJokers(string token)
+        public async Task<ActionResult<JokersResponseModel>> ChangeJokers()
         {
             return await gameService.ChangeJokers();
         }
 
         [HttpGet()]
         [Route(nameof(GetScores))]
-        public async Task<ActionResult<int>> GetScores(string token)
+        public async Task<ActionResult<ScoresResponseModel>> GetScores()
         {
             return await gameService.GetScores();
         }
 
         [HttpGet()]
         [Route(nameof(ChangeScores))]
-        public async Task<ActionResult<int>> ChangeScores(int scores)
+        public async Task<ActionResult<ScoresResponseModel>> ChangeScores()
         {
-            return await gameService.ChangeScores(scores);
+            return await gameService.ChangeScores();
         }
 
         [HttpGet()]
@@ -79,9 +86,9 @@ namespace Hangman.Server.Features.Game
 
         [HttpGet()]
         [Route(nameof(Lose))]
-        public async Task<ActionResult<int>> Lose(int scores)
+        public async Task<ActionResult<bool>> Lose()
         {
-            return await gameService.ChangeScores(scores);
+            return await gameService.Lose();
         }
 
         [HttpPost()]
