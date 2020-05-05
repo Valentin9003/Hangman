@@ -1,19 +1,27 @@
 ﻿using Hangman.Server.Data.Models;
+using Hangman.Server.Features.Image;
+using Hangman.Server.Features.Image.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Hangman.Server.Features
 {
+    [Authorize]
     public class ImageController : ApiController
     {
-        public ImageController()
+        private readonly ImageService imageService;
+        public ImageController(ImageService imageService)
         {
+            this.imageService = imageService;
         }
        
-        public async Task<byte[]> GetVictimPicture()
+        [HttpGet()]
+        [Route(nameof(GetVictimPicture))]
+        public async Task<ImageResponseModel> GetVictimPicture()
         {
-            return new byte[0];
+            return await imageService.GetVictimPicture();
         }
     }
 }

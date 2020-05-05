@@ -1,6 +1,6 @@
 <div *ngIf="victimPicture; then picture else loader"></div>
 <ng-template #picture>
-    <img [src]=victimPicture class="victim-picture" alt="No Image">
+    <img  [src]=victimPicture class="victim-picture" alt="No Image">
 </ng-template>
 <ng-template #loader>
     Loading...

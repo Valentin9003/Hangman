@@ -43,6 +43,7 @@ namespace Hangman.Server.Infrastructure.Extensions
             services.AddTransient<IIdentityService, IdentityService>()
                     .AddTransient<IIdentityServiceHelper, IdentityServiceHelper>()
                     .AddTransient<IGameService, GameService>()
+                    .AddTransient<IGameServiceHelper, GameServiceHelper>()
                     .AddTransient<IImageService,ImageService>();
 
             return services;

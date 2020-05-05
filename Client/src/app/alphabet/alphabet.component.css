@@ -2,8 +2,9 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     display: grid;
     width:220px;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    margin-top: 50px;
     
 
 }
@@ -12,7 +13,13 @@
     list-style-type: none;
     border-style:groove;
     border-color: black;
-    background-color: black;
-    color: greenyellow;
-    margin: 3.4%;
+font-style: oblique;
+    color: black;
+    border-radius: 20px;
+    margin: 4px;
+   border-spacing: 10px;
 } 
+#letter-Y{
+    grid-column-start: 3;
+    grid-column-end: 4;
+}

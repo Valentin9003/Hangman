@@ -26,6 +26,9 @@ export const environment = {
     changeUsername: "identity/changeusername",
     getPassword: "identity/GetPassword",
     getUsername: "identity/GetUsername"
+  },
+  imageUrls:{
+    getImage: "image/getvictimpicture"
   }
 };
 

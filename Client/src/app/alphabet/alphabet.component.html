@@ -1,6 +1,6 @@
 <div class="alphabet-component">
     <ul class="alphabet">
-        <li *ngFor="let letter of alphabet" (click)="choiceLetter($event)" class="letter">
+        <li id="letter-{{letter}}" *ngFor="let letter of alphabet  let i = index" (click)="choiceLetter($event)" class="letter">
           {{ letter }}
         </li>
       </ul>
