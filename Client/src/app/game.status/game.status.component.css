@@ -1,8 +1,4 @@
-.board{
-    display:inline-block;
-}
-.board>div{
-    display:inline-block;
-    padding: 5px;
+:host.bg-dark{
+    background-color: royalblue;
     
 }

@@ -1,21 +1,23 @@
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <navigation class="navigation col-lg-12"></navigation>
     </div>
         <div class="row">
-            <div><victim-picture class="victim-picture"></victim-picture></div>
-            <div class="col col-lg-1 col-md-1 col-xs-1"></div>
-            <div class="col col-lg-5 col-md-5 col-xs-5">
-            <alphabet class="alphabet" (letter)="getLetter($event)"></alphabet>
+            <div class="col col-lg-6 col-md-6 col-xs-6">
+            <div><victim-picture class="col col-lg-6 col-md-6 col-xs-6"></victim-picture></div>
         </div>
+           
+            <alphabet class="alphabet" (letter)="getLetter($event)"></alphabet>
+       
         </div>
         <div class="d-flex justify-content-center">      
-            <app-word [word]="word" class="word"></app-word>
+            <app-word [word]="word" (joker)="getJoker()" class="word"></app-word>
         </div>
-        <div class="d-flex justify-content-center">
-           <game-status [lifes]="lifes" [jokers]="jokers" [scores]="scores" class="game-status col-lg-12"></game-status>
-        </div>
+       
+           
+        
 </div>
 
 
+<game-status class="d-flex justify-content-around" [lifes]="lifes" [jokers]="jokers" [scores]="scores" class="game-status col-lg-12"></game-status>
