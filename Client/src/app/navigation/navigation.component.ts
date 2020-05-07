@@ -24,8 +24,8 @@ export class NavigationComponent implements OnInit {
 
   newGame(): void {
    this.gameService.newGame().subscribe((reload: boolean) =>
-        tap((reload) => reload ? location.reload() : alert("Something went wrong! Try again.."))
-      )
+        reload ? location.reload() : alert("Something went wrong! Try again..")
+      );
     }
       
 }
