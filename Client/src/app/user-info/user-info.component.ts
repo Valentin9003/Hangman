@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { tap } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
+import { ChangePasswordModel } from '../models/ChangePasswordModel';
+import { GetEmailModel } from '../models/GetEmailModel';
+import { ChangeEmailModel } from '../models/ChangeEmailModel';
+import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { GetPasswordModel } from '../models/GetPasswordModel';
+import { stringify } from 'querystring';
+import { confirmedValidator } from 'src/validators/confirmValidator';
 
 @Component({
   selector: 'user-info',
@@ -10,47 +16,72 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class UserInfoComponent implements OnInit {
 
-  public username: string = "dfvdfv";
-  public password: string = "fdvdf";
-  public changedSuccess: boolean = false;
-  public changedFailure: boolean = false;
+  public email: string;
+
+  passwordForm: FormGroup = new FormGroup({});
+  emailForm: FormGroup = new FormGroup({});
   
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private formBuilder: FormBuilder,) 
+  {
+     this.emailForm = formBuilder.group({
+      change_email: new FormControl('',[Validators.required]),
+      password_field: new FormControl('',[Validators.required]),
+     });
+
+     this.passwordForm = this.formBuilder.group({
+      password: new FormControl('',[Validators.required]),
+       new_password: new FormControl('',[Validators.required]),
+       confirm_new_password:  new FormControl('',[Validators.required])
+     },
+      {
+      validator: confirmedValidator('new_password','confirm_new_password')
+      }
+     );
+  }
 
   ngOnInit(): void {
+    this.getEmail();
+    this.getPassword();
   }
 
-  changeUsername(username:string){
-     this.userService.changeUsername(username).subscribe((r: HttpResponse<any>) =>
-  {
-    tap((response:HttpResponse<any>) =>  {
-      response.ok ? this.showChangedSuccessMessage() : this.showChangedFailureMessage();
+  getEmail(){
+  this.userService.getEmail().subscribe((data: GetEmailModel) =>{
+  this.email = data.email
+  })
+  }
+
+  getPassword(){
+    this.userService.getPassword().subscribe((data: GetPasswordModel) =>{
+    this.email = data.password
+  })
+  }
+
+  get f(){
+    return this.passwordForm.controls;
+  }
+
+  get e(){
+    return this.emailForm.controls
+
+  }
+
+  submit(){
+this.userService.changePassword({
+ password:  this.passwordForm.controls["password"].value,
+ newPassword: this.passwordForm.controls["new_password"].value,
+}).subscribe((data) => {
+  this.emailForm.reset();
+});
+  }
+
+  submitEmail(){
+    this.userService.changeEmail({
+      email: this.emailForm.value.change_email,
+      password: this.emailForm.value.password_field
+    }).subscribe((data) =>{
+       this.email = data.email
+       this.emailForm.reset();
     })
-  });
-}
-
-  changePassword(password: string){
-    this.userService.changePassword(password).subscribe((r: HttpResponse<any>) =>
-    {
-      tap((response:HttpResponse<any>) =>  {
-        response.ok ? this.showChangedSuccessMessage() : this.showChangedFailureMessage();
-      })
-    });
-  }
-
-  showChangedSuccessMessage(): void{
-    this.changedSuccess = true;
-
-   setTimeout(() => {
-    this.changedSuccess = false;
-  }, 300);
-  }
-  
-  showChangedFailureMessage(): void{
-    this.changedFailure = true;
-
-   setTimeout(() => {
-    this.changedFailure = false;
-  }, 300);
+   
   }
 }

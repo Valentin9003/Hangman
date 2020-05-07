@@ -1,45 +1,77 @@
 <navigation></navigation>
-<br>
-<div class="container  edit-user">
-   <div class="row">
-       <div class="col-lg-4"></div>
-       <div class="col-lg-4">
-          Edit User Data
-       </div>
-       <div class="col-lg-4"></div>
-   </div>
-   <br><br>
-       <div class="row">
-        <div class="col-lg-2"></div>
-           <span class="col-lg-2 label">Username:</span>
-           <input class="col-lg-2" [ngModel]="username" #username type="text">
-           <div class="col-lg-1"></div>
-           <button class="btn btn-warning btn-sm col-lg-2" (click)="changeUsername(username.value)">Change Username</button>
-           <div class="col-lg-2">
-    </div>
-</div>
-<br>
-    <br>
-    
-    <div class="row">
-        <div class="col-lg-2"></div>
-        <span class="col-lg-2 label">Password:</span>
-        <input class="col-lg-2" [ngModel]="password" #password type="text" #password>
-        <div class="col-lg-1"></div>
-        <button class="btn btn-warning btn-sm col-lg-2" (click)="changePassword(password.value)">Change Password</button>
-        <div class="col-lg-2"></div>
-</div>
-</div>
-<br>
+<div class="container">
+    <h1>Change Password</h1>
+       
+    <form [formGroup]="passwordForm" (ngSubmit)="submit()">
+           
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input 
+                formControlName="password"
+                id="password" 
+                type="password" 
+                class="form-control">
+            <div *ngIf="f.password.touched && f.password.errors" class="alert alert-danger">
+                <div *ngIf="f.password.errors.required">Password is required.</div>
+            </div>
+        </div>
 
-   <br>
-   <div *ngIf="changedSuccess" class="row changed">
-    <div class="col-lg-4"></div>
-    <div class="col-lg-4">Your changes has been saved successfuly</div>
-    <div class="col-lg-4"></div> 
+        <div class="form-group">
+            <label for="new_password">New Password</label>
+            <input 
+                formControlName="new_password"
+                id="new_password" 
+                type="password" 
+                class="form-control">
+            <div *ngIf="f.new_password.touched && f.new_password.errors" class="alert alert-danger">
+                <div *ngIf="f.new_password.errors.required">New Password is required.</div>
+            </div>
+        </div>
+  
+        <div class="form-group">
+            <label for="confirm_password">Confirm New Password</label>
+            <input 
+                formControlName="confirm_new_password"
+                id="confirm_password" 
+                type="password" 
+                class="form-control">
+            <div *ngIf="f.confirm_new_password.touched && f.confirm_new_password.errors" class="alert alert-danger">
+                <div *ngIf="f.confirm_new_password.errors.required">New Password is required.</div>
+                <div *ngIf="f.confirm_new_password.errors.confirmedValidator">Password and Confirm Password must be match.</div>
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" type="submit" [disabled]="!passwordForm.valid">Submit</button>
+    </form>
 </div>
-    <div *ngIf="changedFailure" class="row error">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4">Something went wrong</div>
-        <div class="col-lg-4"></div> 
-    </div>
+<br>
+    <div class="container">
+        <form [formGroup]="emailForm" #email (ngSubmit)="submitEmail()">
+        <h1>Change Email</h1>
+<div class="form-group">
+    <label for="change_email">New Email</label>
+    <input 
+        formControlName="change_email"
+        id="change_email" 
+        type="email" 
+        class="form-control">
+    <div *ngIf="e.change_email.touched && e.change_email.errors" class="alert alert-danger">
+        <div *ngIf="e.change_email.errors.required">Email is required.</div>
+    </div> 
+    <br>
+    <div class="form-group">
+        <label for="password_field">Password</label>
+        <input 
+            formControlName="password_field"
+            id="password_field" 
+            type="password" 
+            class="form-control">
+        <div *ngIf="e.password_field.touched && e.password_field.errors" class="alert alert-danger">
+            <div *ngIf="e.password_field.errors.required">Email is required.</div>
+        </div>
+        </div>
+    <button class="btn btn-primary" type="submit" [disabled]="!emailForm.valid">Submit</button>
+  
+</div>
+</form>
+</div>
