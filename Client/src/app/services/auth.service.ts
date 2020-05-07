@@ -23,9 +23,9 @@ export class AuthService {
 
   login(data: any) {
     this.loggedIn.next(true);
-     this.http.post(this.loginPath, data).subscribe( (data: TokenModel) =>{
-          if(data.token){
-            this.setToken(data.token);
+     this.http.post(this.loginPath, data).subscribe((model: TokenModel) =>{
+          if(model){
+            this.setToken(model.token);
             this.router.navigate(["game"]);
           }
           else{ 

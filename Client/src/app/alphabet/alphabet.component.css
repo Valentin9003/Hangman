@@ -8,17 +8,19 @@
     
 
 }
+
  .letter{
     font-size: 1.9em;
     list-style-type: none;
     border-style:groove;
     border-color: black;
-font-style: oblique;
+    font-style: oblique;
     color: black;
     border-radius: 20px;
     margin: 4px;
-   border-spacing: 10px;
+    border-spacing: 10px;
 } 
+
 #letter-Y{
     grid-column-start: 3;
     grid-column-end: 4;

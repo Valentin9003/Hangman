@@ -1,8 +1,6 @@
-﻿using Hangman.Server.Data.Models;
-using Hangman.Server.Features.Image;
+﻿using Hangman.Server.Features.Image;
 using Hangman.Server.Features.Image.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -12,6 +10,7 @@ namespace Hangman.Server.Features
     public class ImageController : ApiController
     {
         private readonly ImageService imageService;
+
         public ImageController(ImageService imageService)
         {
             this.imageService = imageService;

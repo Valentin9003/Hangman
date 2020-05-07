@@ -23,14 +23,30 @@ namespace Hangman.Server.Features.Game
             => (await this.identityServiceHelper.GetCurrentUser()).Level;
 
         public async Task<bool> CheckExistNextLevel(int nextLevel)
-        {
-            return await context.Words.AnyAsync(l => l.Level == nextLevel);
-        }
+            => await context.Words.AnyAsync(l => l.Level == nextLevel);
+        
 
         public int GetNextLevel(string level)
+           =>  (int.Parse(level) + 1);
+           
+        public async Task<int> LevelUp()
         {
-            var currentLevel = int.Parse(level);
-            return currentLevel + 1;
+            var userId = await identityServiceHelper.GetCurrentUserId();
+
+            var user = await context
+                .Users
+                .Where(u => u.Id == userId)
+                .FirstOrDefaultAsync();
+
+            int.TryParse(user.Level, out int currentLevel);
+
+            var nextLevel = ++currentLevel;
+
+            user.Level = nextLevel.ToString();
+
+            context.SaveChanges();
+
+            return nextLevel;
         }
     }
 }

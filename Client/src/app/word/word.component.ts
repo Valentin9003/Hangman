@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-word',
@@ -7,11 +8,15 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class WordComponent implements OnInit {
 
- @Input() public word: string = "bdccccccccbdhsjfffffffffffr";
+ @Input() public word: string;
  
+ @Output() joker: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  getJoker(){
+  this.joker.emit(null);
+  }
 }

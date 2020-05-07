@@ -1,7 +1,15 @@
-<div class="alphabet-component">
+<div class="alphabet-component container-fluid">
+  <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
     <ul class="alphabet">
         <li id="letter-{{letter}}" *ngFor="let letter of alphabet  let i = index" (click)="choiceLetter($event)" class="letter">
           {{ letter }}
         </li>
       </ul>
+    </div>
+    <div class="col-lg-4"></div>
+    </div>
+     <div>
+      </div>
     </div>

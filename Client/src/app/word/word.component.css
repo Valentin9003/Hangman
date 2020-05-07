@@ -4,7 +4,21 @@
 }
 
 .word{
+    display: inline-flex;
+    justify-self: 5px;
+font-size: 3em;
+font-style: italic;
 background-color: white;
 color: black;
 }
 
+.joker{
+    margin-left: 20px;
+    border: slateblue;
+    font-size: 0.5em;
+    font-style: italic;
+    background-color: white;
+    border-radius: 85%;
+    border-style: dotted;
+    border-color: tomato;
+}
