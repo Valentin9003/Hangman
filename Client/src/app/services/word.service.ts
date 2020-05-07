@@ -17,7 +17,8 @@ export class WordService {
  }
 
  replaceLetter(originalWord: string): string{
-  return originalWord.replace(RegExp('[A-Za-z]','gi'), '_');
+  let word = originalWord.toUpperCase();
+  return word.replace(RegExp('[A-Za-z]','gi'), '_');
  }
 
  findLetter(originalWord: string, word: string, letter: string): string{

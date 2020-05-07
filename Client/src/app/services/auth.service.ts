@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
 import { TokenModel } from '../models/TokenModel';
+import { UsernameModel } from '../models/UsernameModel';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,10 @@ import { TokenModel } from '../models/TokenModel';
 export class AuthService {
   private loginPath = environment.apiUrl + environment.authUrls.login;
   private registerPath = environment.apiUrl + environment.authUrls.register;
+  private getUsernamePath = environment.apiUrl + environment.authUrls.getUsername;
   
   private loggedIn = new BehaviorSubject<boolean>(false); 
-  private Token:TokenModel;
+  public username: string;
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
@@ -32,6 +34,10 @@ export class AuthService {
           location.reload();
           }
     })
+  }
+
+  getUsername(){
+   return this.http.get(this.getUsernamePath);
   }
 
   register(data:any){

@@ -4,7 +4,6 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { WordModel } from '../models/WordModel';
-import { map } from 'rxjs/operators';
 import { ScoreModel } from '../models/ScoreModel';
 import { LifeModel } from '../models/LifeModel';
 import { JokerModel } from '../models/jokerModel';
@@ -24,13 +23,15 @@ export class GameService {
   private changeJokersUrl: string = environment.apiUrl + environment.gameUrls.changeJockers;
   private getNextWordUrl: string = environment.apiUrl + environment.gameUrls.getNextWord;
   private newGameUrl: string = environment.apiUrl + environment.gameUrls.newGame;
+  private getVictimPictureUrl: string = environment.apiUrl + environment.imageUrls.getVictimPicture;
+  private getNextVictimPictureUrl: string = environment.apiUrl + environment.imageUrls.getNextVictimPicture;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
    getWord(): Observable<WordModel> {
     return this.http.get<WordModel>(this.getWordUrl)
    }
-
+   
    getNextWord(): Observable<WordModel> {
     return this.http.get<WordModel>(this.getNextWordUrl)
    }
@@ -74,4 +75,12 @@ export class GameService {
   Lose(): void {
    
   }
+
+  getVictimPicture(): Observable<any> {
+    return this.http.get<any>(this.getVictimPictureUrl)
+   }
+
+   getNextVictimPicture(): Observable<any> {
+    return this.http.get<any>(this.getNextVictimPictureUrl)
+   }
 }

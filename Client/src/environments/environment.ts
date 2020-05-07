@@ -11,7 +11,7 @@ export const environment = {
     getLifes: "game/getlifes",
     changeLifes: "game/changelifes", 
     getJockers: "game/getjokers",
-    changeJockers: "game/getjokers",
+    changeJockers: "game/changejokers",
     getScores: "game/getscores",
     changeScores: "game/changescores",
     getNextWord: "game/getnextword",
@@ -19,7 +19,8 @@ export const environment = {
   },
   authUrls:{
    register: "identity/register",
-   login: "identity/login"
+   login: "identity/login",
+   getUsername: "identity/getusername"
   },
   userInfoUrls:{
     changePassword: "identity/changepassword",
@@ -28,7 +29,8 @@ export const environment = {
     getEmail: "identity/getemail"
   },
   imageUrls:{
-    getImage: "image/getvictimpicture"
+    getVictimPicture: "victimpicture/getvictimpicture",
+    getNextVictimPicture: "victimpicture/getnextvictimvicture"
   }
 };
 
