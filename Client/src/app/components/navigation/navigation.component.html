@@ -1,0 +1,27 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light"> 
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> 
+    <a class="navbar-brand" href="/game">Game</a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active" (click)="newGame()">
+            <a class="nav-link" [routerLink]="['/game']">New Game<span class="sr-only"></span></a>
+          </li>
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/user']">User<span class="sr-only"></span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/aboutus']">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" [routerLink]="['#']">Disabled</a>
+        </li>
+      </ul> 
+      <div class=" username my-2 my-sm-0">Hello,{{username}}</div>
+      <button class="btn btn-outline-danger my-2 my-sm-0" type="button" (click)="logout()">Logout</button>
+    </div>
+    </nav>
+   
+ 

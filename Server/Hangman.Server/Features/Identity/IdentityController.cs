@@ -134,6 +134,7 @@ namespace Hangman.Server.Features.Identity
            return BadRequest(result.Errors);
         }
 
+        [HttpGet]
         [Route(nameof(GetEmail))]
         public async Task<ActionResult<GetEmailResponseModel>> GetEmail()
         {
@@ -144,5 +145,18 @@ namespace Hangman.Server.Features.Identity
                 Email = email
             };
         }
-    }
+
+        [HttpGet]
+        [Route(nameof(GetUsername))]
+        public ActionResult<UsernameResponseModel> GetUsername()
+        {
+            var username = this.User.Identity.Name;
+
+            return new UsernameResponseModel
+            {
+                Username = username
+            };
+        }
+
+     }
 }

@@ -17,10 +17,10 @@ namespace Hangman.Server.Features.Game
         private readonly HangmanDbContext context;
         private readonly IHttpContextAccessor accessor;
         private readonly UserManager<User> userManager;
-        private readonly IIdentityServiceHelper identityService;
-        private readonly IGameServiceHelper gameServiceHelper;
+        private readonly IIdentityServiceCommon identityService;
+        private readonly IGameServiceCommon gameServiceHelper;
 
-        public GameService(HangmanDbContext context, IHttpContextAccessor accessor, UserManager<User> userManager, IIdentityServiceHelper identityService, IGameServiceHelper gameServiceHelper)
+        public GameService(HangmanDbContext context, IHttpContextAccessor accessor, UserManager<User> userManager, IIdentityServiceCommon identityService, IGameServiceCommon gameServiceHelper)
         {
             this.context = context;
             this.accessor = accessor;

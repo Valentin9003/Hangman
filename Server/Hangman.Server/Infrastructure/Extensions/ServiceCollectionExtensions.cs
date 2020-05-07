@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using Hangman.Server.Features.Game;
-using Hangman.Server.Features.Image;
+using Hangman.Server.Features.VictimPicture;
 
 namespace Hangman.Server.Infrastructure.Extensions
 {
@@ -41,10 +41,11 @@ namespace Hangman.Server.Infrastructure.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddTransient<IIdentityService, IdentityService>()
-                    .AddTransient<IIdentityServiceHelper, IdentityServiceHelper>()
+                    .AddTransient<IIdentityServiceCommon, IdentityServiceCommon>()
                     .AddTransient<IGameService, GameService>()
-                    .AddTransient<IGameServiceHelper, GameServiceHelper>()
-                    .AddTransient<IImageService,ImageService>();
+                    .AddTransient<IGameServiceCommon, GameServiceCommon>()
+                    .AddTransient<IVictimPictureService, VictimPictureService>()
+                    .AddTransient<IVictimPictureServiceCommon, VictimPictureServiceCommon>();
 
             return services;
         }
@@ -79,7 +80,7 @@ namespace Hangman.Server.Infrastructure.Extensions
             => services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc(
-                    "v1",
+                    ProjectConstants.SwaggerApiVersion,
                     new OpenApiInfo
                     {
                         Title = ProjectConstants.SwaggerApiTitle,

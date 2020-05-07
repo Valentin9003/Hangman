@@ -17,8 +17,6 @@ namespace Hangman.Server.Data
         public DbSet<User> User { get; set; }
 
         public DbSet<Word> Words { get; set; }
-
-        public DbSet<VictimPicture> VictimPicture { get; set; }
         
         protected override void OnModelCreating(ModelBuilder builder)
         {

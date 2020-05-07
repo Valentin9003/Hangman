@@ -1,17 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { GameComponent } from './game/game.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { GameComponent } from './components/game/game.component';
 import { AuthGuardService } from './services/auth.guard.service';
-import { UserInfoComponent } from './user-info/user-info.component';
+import { UserInfoComponent } from './components/user/user.component';
+import { UnauthGuardService } from './services/unauth.guard.service';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: '/game',
-  //   pathMatch: 'full'
-  // },
+  {
+    path: '',
+    redirectTo: '/game',
+    pathMatch: 'full',
+    canActivate:[AuthGuardService]
+  },
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
+    canActivate:[UnauthGuardService]
+  },
   {
     path: 'game',
     component: GameComponent,
@@ -19,16 +28,22 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate:[UnauthGuardService]
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate:[UnauthGuardService]
   },
   {
     path: 'user',
-    component: UserInfoComponent,
+    component: UserInfoComponent, 
     canActivate:[AuthGuardService]
+  },
+  {
+    path: 'aboutus',
+    component: AboutUsComponent
   },
 ];
 

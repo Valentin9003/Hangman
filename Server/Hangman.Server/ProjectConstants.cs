@@ -13,5 +13,7 @@
         public const string DefaultConnection = "DefaultConnection";
 
         public const string SwaggerEndpoint = "/swagger/v1/swagger.json";
+
+        public const string VictimPicturesWebRootFolderNamePathTemplate = "/wwwroot/victimPictures/";
     }
 }

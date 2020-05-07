@@ -28,7 +28,7 @@ namespace Hangman.Server.Features.Game
             return await gameService.GetNextWord();
         }
 
-        [HttpPost()]
+        [HttpGet()]
         [Route(nameof(GameStatus))]
         public async Task<ActionResult<bool>> GameStatus()
         {
