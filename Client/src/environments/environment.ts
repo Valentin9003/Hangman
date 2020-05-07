@@ -23,9 +23,9 @@ export const environment = {
   },
   userInfoUrls:{
     changePassword: "identity/changepassword",
-    changeUsername: "identity/changeusername",
-    getPassword: "identity/GetPassword",
-    getUsername: "identity/GetUsername"
+    changeEmail: "identity/changeemail",
+    getPassword: "identity/getPassword",
+    getEmail: "identity/getemail"
   },
   imageUrls:{
     getImage: "image/getvictimpicture"
