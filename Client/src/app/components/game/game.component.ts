@@ -7,7 +7,7 @@ import { ScoreModel } from '../../models/ScoreModel';
 import { JokerModel } from '../../models/jokerModel';
 import { VictimPictureModel } from 'src/app/models/VictimPictureModel';
 import { ImageService } from 'src/app/services/image.service';
-import { NextVictimPictureModel } from 'src/app/models/NextVictimPictureModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'game',
@@ -23,14 +23,18 @@ export class GameComponent implements OnInit {
   public jokers: number;
   public victimPicture: any;
 
-  constructor(private gameService: GameService, private wordService: WordService,private imageService: ImageService) { }
+  constructor(private gameService: GameService, private wordService: WordService,private imageService: ImageService, private router: Router) 
+  {
+   
+  }
 
   ngOnInit() {
-      this.gameService.getWord().subscribe((model: WordModel) => {
-      this.originalWord = model.word.toUpperCase();
-      this.word = this.wordService.replaceLetter(model.word.toUpperCase());
+      this.gameService.getWord()
+          .subscribe((model: WordModel) => {
+             this.originalWord = model.word.toUpperCase();
+             this.word = this.wordService.replaceLetter(model.word.toUpperCase());
+      })
       this.getVictimPicture();
-    })
   }
 
    getLetter(letter: string){
@@ -43,11 +47,10 @@ export class GameComponent implements OnInit {
         this.gameService.changeLifes()
         .subscribe((data: LifeModel) => {
           this.lifes = data.lifes;
-
+          this.getNextVictimPicture();
           if(data.lose){
-            this.reloadGame();
-          }
-          
+          this.router.navigate(['lose']);
+          }  
        });
      }
   }
@@ -55,6 +58,7 @@ export class GameComponent implements OnInit {
   checkForNextLevel(){
     if(!this.word.match('_')){
       this.gameService.getNextWord().subscribe((model: WordModel) =>{
+
         setTimeout(() => {
       this.word = this.wordService.replaceLetter(model.word);
       this.originalWord = model.word;
@@ -90,8 +94,8 @@ export class GameComponent implements OnInit {
 })}
 
   getNextVictimPicture(){
-  this.gameService.getVictimPicture().subscribe((data: NextVictimPictureModel) => {
-    
-  this.victimPicture = this.imageService.getImage(data.NextVictimPicture)
+  this.gameService.getVictimPicture().subscribe((data: VictimPictureModel) => {
+
+  this.victimPicture = this.imageService.getImage(data.victimPicture)
   })}
 }

@@ -1,6 +1,9 @@
 ﻿using Hangman.Server.Features.Identity;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,9 +12,11 @@ namespace Hangman.Server.Features.VictimPicture
     public class VictimPictureServiceCommon: IVictimPictureServiceCommon
     {
         private readonly IIdentityServiceCommon identityService;
-        public VictimPictureServiceCommon(IIdentityServiceCommon identityService)
+        private readonly IHostEnvironment env;
+        public VictimPictureServiceCommon(IHostEnvironment env, IIdentityServiceCommon identityService)
         {
             this.identityService = identityService;
+            this.env = env;
         }
 
         public async Task<string> GetNextLevel()
@@ -48,5 +53,19 @@ namespace Hangman.Server.Features.VictimPicture
             return (await this.identityService.GetCurrentUser()).Lives;
         }
 
+        public async Task<string> ToBase64String(string PhysicalPath)
+        {
+            var pictureFileInfo = env.ContentRootFileProvider.GetFileInfo(PhysicalPath);
+
+            if (pictureFileInfo.Exists)
+            {
+                var pictureByteArray = await File.ReadAllBytesAsync(pictureFileInfo.PhysicalPath);
+                var pictureString = Convert.ToBase64String(pictureByteArray);
+
+                return pictureString;
+            }
+
+            return null;
+        }
     }
 }

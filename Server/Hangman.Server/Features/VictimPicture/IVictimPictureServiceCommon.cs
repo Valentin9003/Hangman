@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.FileProviders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,5 +13,7 @@ namespace Hangman.Server.Features.VictimPicture
         Task<int> GetLevel();
 
         Task<int> GetUserLifes();
+
+        Task<string> ToBase64String(string PhysicalPath);
     }
 }

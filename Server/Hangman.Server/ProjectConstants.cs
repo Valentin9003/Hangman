@@ -15,5 +15,11 @@
         public const string SwaggerEndpoint = "/swagger/v1/swagger.json";
 
         public const string VictimPicturesWebRootFolderNamePathTemplate = "/wwwroot/victimPictures/";
+
+        public const string WinPictureWebRootFolderNamePathTemplate = "/wwwroot/win/win";
+
+        public const string LosePictureWebRootFolderNamePathTemplate = "/wwwroot/lose/lose";
+
+        public const string JpgFileFormat = ".jpg";
     }
 }

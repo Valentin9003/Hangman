@@ -3,7 +3,7 @@ import { UserService } from '../../services/user.service';
 import { GetEmailModel } from '../../models/GetEmailModel';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { GetPasswordModel } from '../../models/GetPasswordModel';
-import { confirmedValidator } from 'src/validators/confirmValidator';
+import { confirmedValidator } from 'src/app/common/confirmValidator';
 
 @Component({
   selector: 'user',
@@ -37,18 +37,11 @@ export class UserInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmail();
-    this.getPassword();
   }
 
   getEmail(){
   this.userService.getEmail().subscribe((data: GetEmailModel) =>{
   this.email = data.email
-  })
-  }
-
-  getPassword(){
-    this.userService.getPassword().subscribe((data: GetPasswordModel) =>{
-    this.email = data.password
   })
   }
 

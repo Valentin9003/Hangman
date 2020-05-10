@@ -39,6 +39,30 @@ namespace Hangman.Server.Features.Game
                 VictimPicture = picture
             };
         }
+
+        [HttpGet]
+        [Route(nameof(GetWinPicture))]
+        public async Task<ActionResult<GetWinPictureResponseModel>> GetWinPicture()
+        {
+            var picture = await victimPictureService.GetWinPicture();
+
+            return new GetWinPictureResponseModel
+            {
+                WinPicture = picture
+            };
+        }
+
+        [HttpGet]
+        [Route(nameof(GetLosePicture))]
+        public async Task<ActionResult<GetLosePictureResponseModel>> GetLosePicture()
+        {
+            var picture = await victimPictureService.GetLosePicture();
+
+            return new GetLosePictureResponseModel
+            {
+                LosePicture = picture
+            };
+        }
     }
 }
 

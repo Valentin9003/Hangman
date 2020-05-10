@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import {GameService} from "../../services/game.service";
+import { ImageService } from 'src/app/services/image.service';
+import { WinPictureModel } from 'src/app/models/WinPictureModel';
 @Component({
   selector: 'app-win',
   templateUrl: './win.component.html',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WinComponent implements OnInit {
 
-  constructor() { }
+  public winPicture: string;
+
+  constructor(private gameService: GameService, private imageService: ImageService) { }
 
   ngOnInit(): void {
+    this.loadWinPicture();
   }
-
+  loadWinPicture(){
+    this.gameService.Win().subscribe((data: WinPictureModel) =>{
+      this.winPicture = this.imageService.getImage(data.winPicture);
+    })
+  }
 }
+

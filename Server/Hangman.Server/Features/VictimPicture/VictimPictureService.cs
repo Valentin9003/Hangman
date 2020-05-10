@@ -7,11 +7,9 @@ namespace Hangman.Server.Features.VictimPicture
 {
     public class VictimPictureService: IVictimPictureService
     {
-        private readonly IHostEnvironment env;
         private readonly IVictimPictureServiceCommon pictureServiceCommon;
-        public VictimPictureService(IHostEnvironment env, IVictimPictureServiceCommon pictureServiceCommon)
+        public VictimPictureService( IVictimPictureServiceCommon pictureServiceCommon)
         {
-            this.env = env;
             this.pictureServiceCommon = pictureServiceCommon;
         }
 
@@ -20,32 +18,40 @@ namespace Hangman.Server.Features.VictimPicture
         {
             var pictureNumber = await pictureServiceCommon.GetLevel();
 
-                var pictureFileInfo = env.ContentRootFileProvider.GetFileInfo(ProjectConstants.VictimPicturesWebRootFolderNamePathTemplate + $"{pictureNumber}.jpg");
+            var pictureFilePath = ProjectConstants.VictimPicturesWebRootFolderNamePathTemplate + $"{pictureNumber}" + ProjectConstants.JpgFileFormat;
 
-                if (pictureFileInfo.Exists)
-                {
-                    var pictureByteArray =  await File.ReadAllBytesAsync(pictureFileInfo.PhysicalPath);
-                    var pictureString = Convert.ToBase64String(pictureByteArray);
-                    return pictureString;
-                }
+            var result = await pictureServiceCommon.ToBase64String(pictureFilePath);
 
-                    return null;   
+            return result;
         }
 
         public async Task<string> GetNextPicture()
         {
             var nextPictureNumber = await pictureServiceCommon.GetNextLevel();
 
-            var pictureFileInfo = env.ContentRootFileProvider.GetFileInfo(ProjectConstants.VictimPicturesWebRootFolderNamePathTemplate + $"{nextPictureNumber}.jpg");
+            var pictureFilePath = ProjectConstants.VictimPicturesWebRootFolderNamePathTemplate + $"{nextPictureNumber}" + ProjectConstants.JpgFileFormat;
 
-            if (pictureFileInfo.Exists)
-            {
-                var pictureByteArray = await File.ReadAllBytesAsync(pictureFileInfo.PhysicalPath);
-                var pictureString = Convert.ToBase64String(pictureByteArray);
-                return pictureString;
-            }
+            var result = await pictureServiceCommon.ToBase64String(pictureFilePath);
 
-            return null;
+            return result;
+        }
+
+        public async Task<string> GetWinPicture()
+        {
+            var pictureFilePath = ProjectConstants.WinPictureWebRootFolderNamePathTemplate + $"{ProjectConstants.JpgFileFormat}";
+
+            var result = await pictureServiceCommon.ToBase64String(pictureFilePath);
+
+            return result;
+        }
+
+        public async Task<string> GetLosePicture()
+        {
+            var pictureFilePath = ProjectConstants.LosePictureWebRootFolderNamePathTemplate + $"{ProjectConstants.JpgFileFormat}";
+
+            var result = await pictureServiceCommon.ToBase64String(pictureFilePath);
+
+            return result;
         }
     }
 }
