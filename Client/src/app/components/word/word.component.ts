@@ -17,6 +17,7 @@ export class WordComponent implements OnInit {
   }
 
   getJoker(){
+    console.log("emit");
   this.joker.emit(null);
   }
 }

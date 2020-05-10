@@ -7,6 +7,8 @@ import { AuthGuardService } from './services/auth.guard.service';
 import { UserInfoComponent } from './components/user/user.component';
 import { UnauthGuardService } from './services/unauth.guard.service';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { LoseComponent } from './components/lose/lose.component';
+import { WinComponent } from './components/win/win.component';
 
 const routes: Routes = [
   {
@@ -44,6 +46,16 @@ const routes: Routes = [
   {
     path: 'aboutus',
     component: AboutUsComponent
+  },
+  {
+    path: 'lose',
+    component: LoseComponent,
+    canActivate:[AuthGuardService]
+  },
+  {
+    path: 'win',
+    component: WinComponent,
+    canActivate:[AuthGuardService]
   },
 ];
 

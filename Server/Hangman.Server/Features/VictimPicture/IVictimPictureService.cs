@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 
 namespace Hangman.Server.Features.VictimPicture
 {
-   public interface IVictimPictureService
+    public interface IVictimPictureService
     {
-       Task<string> GetPicture();
+        Task<string> GetPicture();
 
         Task<string> GetNextPicture();
 
+        Task<string> GetLosePicture();
+
+        Task<string> GetWinPicture();
     }
 }

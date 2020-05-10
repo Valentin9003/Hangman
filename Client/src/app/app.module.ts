@@ -21,6 +21,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { WinComponent } from './components/win/win.component';
 import {RouterModule } from '@angular/router';
+import { LoseComponent } from './components/lose/lose.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import {RouterModule } from '@angular/router';
     UnauthorizedNavbarMenuComponent,
     FooterComponent,
     AboutUsComponent,
-    WinComponent
+    WinComponent,
+    LoseComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import {RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    CommonModule
   ],
   providers: [
  {

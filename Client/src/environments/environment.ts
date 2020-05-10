@@ -30,7 +30,9 @@ export const environment = {
   },
   imageUrls:{
     getVictimPicture: "victimpicture/getvictimpicture",
-    getNextVictimPicture: "victimpicture/getnextvictimvicture"
+    getNextVictimPicture: "victimpicture/getnextvictimvicture",
+    getLosePictureUrl: "victimpicture/getlosepicture",
+    getWinPictureUrl: "victimpicture/getwinpicture"
   }
 };
 

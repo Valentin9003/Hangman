@@ -13,7 +13,6 @@ export class UserService {
 
   private changePasswordUrl = environment.apiUrl + environment.userInfoUrls.changePassword;
   private changeUsernameUrl = environment.apiUrl + environment.userInfoUrls.changeEmail;
-  private getPasswordUrl = environment.apiUrl + environment.userInfoUrls.getPassword;
   private getEmailUrl = environment.apiUrl + environment.userInfoUrls.getEmail;
 
   constructor(private http: HttpClient) { }
@@ -26,9 +25,6 @@ export class UserService {
   return this.http.post<ChangeEmailModel>(this.changeUsernameUrl, model);
   } 
 
-  getPassword(): Observable<any>{
-   return this.http.get<any>(this.getPasswordUrl);
-  }
   getEmail(): Observable<any>{
     return this.http.get(this.getEmailUrl);
   }

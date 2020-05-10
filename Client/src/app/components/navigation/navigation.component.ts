@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { GameService } from '../../services/game.service';
 import { UsernameModel } from 'src/app/models/UsernameModel';
@@ -11,10 +11,10 @@ import { UsernameModel } from 'src/app/models/UsernameModel';
 export class NavigationComponent implements OnInit {
 
   public username: string;
-
+  public showMenu: boolean;
   constructor(private authService: AuthService, private gameService: GameService) { 
   }
-
+  
   ngOnInit() {
     this.getUserName();
   }
@@ -33,5 +33,13 @@ export class NavigationComponent implements OnInit {
       this.authService.getUsername().subscribe((data: UsernameModel) =>{
         this.username = data.username
       })
+    }
+
+     openNav() {
+      this.showMenu = true;
+    }
+    
+     closeNav() { 
+       this.showMenu = false;
     }
 }
