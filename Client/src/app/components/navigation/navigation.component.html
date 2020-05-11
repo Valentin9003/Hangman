@@ -1,5 +1,5 @@
 
-    <div #mySidebar class="sidebar" [style.width]="showMenu ? '250px' : '0'">
+    <div #mySidebar class="sidebar" [style.width]="showMenu ? '300px' : '0'">
       <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
       <a class=" username my-2 my-sm-0">{{username}}</a>
       <a class="navbar-brand" href="/game">Game</a>
@@ -9,7 +9,7 @@
         
         <a class="btn btn-outline-danger nav-link" type="button" (click)="logout()">Logout</a>
     </div>
-    
-    <div id="main" [style.width]="showMenu ? '0' : '250px'">
+
+    <div id="main" [style.visibility]="showMenu ? 'hidden': ''">
       <button class="openbtn" (click)="openNav()">&#9776; Menu</button>
     </div>
