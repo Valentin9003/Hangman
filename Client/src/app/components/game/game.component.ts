@@ -33,7 +33,7 @@ export class GameComponent implements OnInit {
           .subscribe((model: WordModel) => {
              this.originalWord = model.word.toUpperCase();
              this.word = this.wordService.replaceLetter(model.word.toUpperCase());
-      })
+          })
       this.getVictimPicture();
   }
 
@@ -89,13 +89,11 @@ export class GameComponent implements OnInit {
 
   getVictimPicture(){
   this.gameService.getVictimPicture().subscribe((data: VictimPictureModel) => {
-
   this.victimPicture = this.imageService.getImage(data.victimPicture)
 })}
 
   getNextVictimPicture(){
   this.gameService.getVictimPicture().subscribe((data: VictimPictureModel) => {
-
   this.victimPicture = this.imageService.getImage(data.victimPicture)
   })}
 }
