@@ -1,20 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { HttpClient, HttpResponse } from '@angular/common/http'
-import { environment } from 'src/environments/environment';
+import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router';
-import { map, tap } from 'rxjs/operators';
 import { TokenModel } from '../models/TokenModel';
-import { UsernameModel } from '../models/UsernameModel';
+import { authUrls } from "../common/authUrls";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private loginPath = environment.apiUrl + environment.authUrls.login;
-  private registerPath = environment.apiUrl + environment.authUrls.register;
-  private getUsernamePath = environment.apiUrl + environment.authUrls.getUsername;
-  
+ 
   private loggedIn = new BehaviorSubject<boolean>(false); 
   public username: string;
 
@@ -25,7 +20,7 @@ export class AuthService {
 
   login(data: any) {
     this.loggedIn.next(true);
-     this.http.post(this.loginPath, data).subscribe((model: TokenModel) =>{
+     this.http.post(authUrls.loginPath, data).subscribe((model: TokenModel) =>{
           if(model){
             this.setToken(model.token);
             this.router.navigate(["game"]);
@@ -37,11 +32,11 @@ export class AuthService {
   }
 
   getUsername(){
-   return this.http.get(this.getUsernamePath);
+   return this.http.get(authUrls.getUsernamePath);
   }
 
   register(data:any){
-    return this.http.post<TokenModel>(this.registerPath, data);
+    return this.http.post<TokenModel>(authUrls.registerPath, data);
   }
 
   setToken(token: string) {
