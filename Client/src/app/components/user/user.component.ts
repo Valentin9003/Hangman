@@ -3,7 +3,7 @@ import { UserService } from '../../services/user.service';
 import { GetEmailModel } from '../../models/GetEmailModel';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { GetPasswordModel } from '../../models/GetPasswordModel';
-import { confirmedValidator } from 'src/app/common/confirmValidator';
+import { passwordConfirmValidator } from 'src/app/common/passwordConfirmValidator';
 
 @Component({
   selector: 'user',
@@ -30,7 +30,7 @@ export class UserInfoComponent implements OnInit {
        confirm_new_password:  new FormControl('',[Validators.required])
      },
       {
-      validator: confirmedValidator('new_password','confirm_new_password')
+      validator: passwordConfirmValidator('new_password','confirm_new_password')
       }
      );
   }
@@ -56,20 +56,18 @@ export class UserInfoComponent implements OnInit {
 
   submit(){
 this.userService.changePassword({
- password:  this.passwordForm.controls["password"].value,
- newPassword: this.passwordForm.controls["new_password"].value,
-}).subscribe(() => {
-  this.emailForm.reset();
+   password:  this.passwordForm.controls["password"].value,
+   newPassword: this.passwordForm.controls["new_password"].value,}).subscribe(() => {
+     this.emailForm.reset();
 });
   }
 
   submitEmail(){
     this.userService.changeEmail({
       email: this.emailForm.value.change_email,
-      password: this.emailForm.value.password_field
-    }).subscribe((data) =>{
-       this.email = data.email
-       this.emailForm.reset();
+      password: this.emailForm.value.password_field}).subscribe((data) =>{
+        this.email = data.email
+        this.emailForm.reset();
     })
    
   }

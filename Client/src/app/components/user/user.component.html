@@ -37,7 +37,7 @@
                 class="form-control">
             <div *ngIf="f.confirm_new_password.touched && f.confirm_new_password.errors" class="alert alert-danger">
                 <div *ngIf="f.confirm_new_password.errors.required">New Password is required.</div>
-                <div *ngIf="f.confirm_new_password.errors.confirmedValidator">Password and Confirm Password must be match.</div>
+                <div *ngIf="f.confirm_new_password.errors.passwordConfirmValidator">Password and Confirm Password must be match.</div>
             </div>
         </div>
         
