@@ -3,7 +3,7 @@ import { UserService } from '../../services/user.service';
 import { GetEmailModel } from '../../models/GetEmailModel';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { GetPasswordModel } from '../../models/GetPasswordModel';
-import { passwordConfirmValidator } from 'src/app/common/passwordConfirmValidator';
+import { passwordConfirmValidator } from 'src/app/common/validators/passwordConfirmValidator';
 
 @Component({
   selector: 'user',
@@ -13,7 +13,6 @@ import { passwordConfirmValidator } from 'src/app/common/passwordConfirmValidato
 export class UserInfoComponent implements OnInit {
 
   public email: string;
-
   passwordForm: FormGroup = new FormGroup({});
   emailForm: FormGroup = new FormGroup({});
   

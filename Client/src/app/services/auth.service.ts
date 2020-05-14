@@ -3,7 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router';
 import { TokenModel } from '../models/TokenModel';
-import { authUrls } from "../common/authUrls";
+import { authUrls } from "../common/Urls/authUrls";
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -16,17 +17,15 @@ export class AuthService {
   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService ) { }
 
   login(data: any) {
     this.loggedIn.next(true);
      this.http.post(authUrls.loginPath, data).subscribe((model: TokenModel) =>{
           if(model){
             this.setToken(model.token);
+            this.toastr.success("Login successfully");
             this.router.navigate(["game"]);
-          }
-          else{ 
-          location.reload();
           }
     })
   }
@@ -58,6 +57,7 @@ export class AuthService {
   logout(){
     this.deleteToken();
     this.loggedIn.next(false);
+    this.toastr.success("Logout successfully");
     this.router.navigate(["login"]);
   }
 }

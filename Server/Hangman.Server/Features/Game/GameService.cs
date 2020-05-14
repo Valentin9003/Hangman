@@ -1,13 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Hangman.Server.Data;
-using Hangman.Server.Data.Models;
 using Hangman.Server.Features.Game.Models;
 using Hangman.Server.Features.Identity;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hangman.Server.Features.Game
@@ -15,16 +10,12 @@ namespace Hangman.Server.Features.Game
     public class GameService : IGameService
     {
         private readonly HangmanDbContext context;
-        private readonly IHttpContextAccessor accessor;
-        private readonly UserManager<User> userManager;
         private readonly IIdentityServiceCommon identityService;
         private readonly IGameServiceCommon gameServiceHelper;
 
-        public GameService(HangmanDbContext context, IHttpContextAccessor accessor, UserManager<User> userManager, IIdentityServiceCommon identityService, IGameServiceCommon gameServiceHelper)
+        public GameService(HangmanDbContext context,IIdentityServiceCommon identityService, IGameServiceCommon gameServiceHelper)
         {
             this.context = context;
-            this.accessor = accessor;
-            this.userManager = userManager;
             this.identityService = identityService;
             this.gameServiceHelper = gameServiceHelper;
         }
@@ -128,9 +119,7 @@ namespace Hangman.Server.Features.Game
             {
                 Jokers = (await this.identityService.GetCurrentUser()).Jokers,
                 HaveJokers = true
-            };
-
-            
+            };    
         }
 
         public async Task<LifesResponseModel> GetLifes()
@@ -236,6 +225,5 @@ namespace Hangman.Server.Features.Game
 
         public async Task<bool> Win()
            => await this.NewGame();
-        
     }
 }

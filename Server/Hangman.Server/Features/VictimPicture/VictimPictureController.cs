@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Hangman.Server.Features.Game.Models;
 using Hangman.Server.Features.VictimPicture;
 using Hangman.Server.Features.VictimPicture.Models;
 

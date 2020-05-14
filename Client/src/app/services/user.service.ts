@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ChangePasswordModel } from '../models/ChangePasswordModel';
 import { ChangeEmailModel } from '../models/ChangeEmailModel';
 import { GetPasswordModel } from '../models/GetPasswordModel';
-import { userUrls } from "../common/userUrls"
+import { userUrls } from "../common/Urls/userUrls"
 
 @Injectable({
   providedIn: 'root'

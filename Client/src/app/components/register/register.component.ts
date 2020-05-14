@@ -22,7 +22,7 @@ registerForm: FormGroup
   ngOnInit(): void {
   }
 
-  register(){    console.log(this.registerForm.value);
+  register(){
     this.authService.register(this.registerForm.value).subscribe(() =>
       this.router.navigate(["login"])
     );

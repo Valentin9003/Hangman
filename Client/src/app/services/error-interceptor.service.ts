@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorInterceptorService implements HttpInterceptor {
 
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
    return next.handle(req).pipe(
      retry(1),
@@ -30,7 +31,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
         //global message for error
         message = "Unexpected error"
       }
-
+      this.toastr.error(message)
       return throwError(err);
    })
    )
