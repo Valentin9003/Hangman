@@ -79,7 +79,8 @@ namespace Hangman.Server.Features.Identity
         {
             var user = await userManager
                 .GetUserAsync(this.User);
-           var passwordConfirm = await userManager
+
+            var passwordConfirm = await userManager
                 .CheckPasswordAsync(user, changeUsernameModel.Password);
 
             if (!passwordConfirm)

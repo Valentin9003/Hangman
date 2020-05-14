@@ -8,6 +8,7 @@ import { JokerModel } from '../../models/jokerModel';
 import { VictimPictureModel } from 'src/app/models/VictimPictureModel';
 import { ImageService } from 'src/app/services/image.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'game',
@@ -23,7 +24,7 @@ export class GameComponent implements OnInit {
   public jokers: number;
   public victimPicture: any;
 
-  constructor(private gameService: GameService, private wordService: WordService,private imageService: ImageService, private router: Router) 
+  constructor(private gameService: GameService, private wordService: WordService,private imageService: ImageService, private router: Router,  private toastr: ToastrService ) 
   {
    
   }
@@ -33,7 +34,7 @@ export class GameComponent implements OnInit {
           .subscribe((model: WordModel) => {
              this.originalWord = model.word.toUpperCase();
              this.word = this.wordService.replaceLetter(model.word.toUpperCase());
-      })
+          })
       this.getVictimPicture();
   }
 
@@ -49,6 +50,7 @@ export class GameComponent implements OnInit {
           this.lifes = data.lifes;
           this.getNextVictimPicture();
           if(data.lose){
+            this.toastr.info("You Lose");
           this.router.navigate(['lose']);
           }  
        });
@@ -58,7 +60,10 @@ export class GameComponent implements OnInit {
   checkForNextLevel(){
     if(!this.word.match('_')){
       this.gameService.getNextWord().subscribe((model: WordModel) =>{
-
+          if(model.word === "YOU WIN"){
+            this.toastr.info("You Win");
+            this.router.navigate(["win"]);
+          }
         setTimeout(() => {
       this.word = this.wordService.replaceLetter(model.word);
       this.originalWord = model.word;
@@ -84,18 +89,19 @@ export class GameComponent implements OnInit {
         this.word = this.wordService.applyJoker(this.originalWord, this.word);
         this.checkForNextLevel();
       }
+      else{
+       this.toastr.info("You don't have more jokers")
+      }
     })
   }
 
   getVictimPicture(){
   this.gameService.getVictimPicture().subscribe((data: VictimPictureModel) => {
-
   this.victimPicture = this.imageService.getImage(data.victimPicture)
 })}
 
   getNextVictimPicture(){
   this.gameService.getVictimPicture().subscribe((data: VictimPictureModel) => {
-
   this.victimPicture = this.imageService.getImage(data.victimPicture)
   })}
 }

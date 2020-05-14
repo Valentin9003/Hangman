@@ -8,7 +8,7 @@ import { LifeModel } from '../models/LifeModel';
 import { JokerModel } from '../models/jokerModel';
 import { Router } from '@angular/router';
 import { LosePictureModel } from '../models/LosePictureModel';
-import {apiUrls}  from '../common/apiUrls'
+import {apiUrls}  from '../common/Urls/apiUrls'
 import { WinPictureModel } from '../models/WinPictureModel';
 
 @Injectable({

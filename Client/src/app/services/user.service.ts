@@ -5,27 +5,24 @@ import { environment } from 'src/environments/environment';
 import { ChangePasswordModel } from '../models/ChangePasswordModel';
 import { ChangeEmailModel } from '../models/ChangeEmailModel';
 import { GetPasswordModel } from '../models/GetPasswordModel';
+import { userUrls } from "../common/Urls/userUrls"
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private changePasswordUrl = environment.apiUrl + environment.userInfoUrls.changePassword;
-  private changeUsernameUrl = environment.apiUrl + environment.userInfoUrls.changeEmail;
-  private getEmailUrl = environment.apiUrl + environment.userInfoUrls.getEmail;
-
   constructor(private http: HttpClient) { }
 
   changePassword(model: ChangePasswordModel): Observable<any>{
-  return this.http.post(this.changePasswordUrl, model);
+  return this.http.post(userUrls .changePasswordUrl, model);
   }
 
   changeEmail(model: ChangeEmailModel): Observable<any>{
-  return this.http.post<ChangeEmailModel>(this.changeUsernameUrl, model);
+  return this.http.post<ChangeEmailModel>(userUrls.changeUsernameUrl, model);
   } 
 
   getEmail(): Observable<any>{
-    return this.http.get(this.getEmailUrl);
+    return this.http.get(userUrls.getEmailUrl);
   }
 }

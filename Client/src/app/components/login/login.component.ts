@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { tap, map } from 'rxjs/operators';
-import { TokenModel } from '../../models/TokenModel';
 
 
 @Component({
@@ -27,6 +25,7 @@ export class LoginComponent implements OnInit {
   }
 login(){
   this.authService.login(this.loginForm.value)
+  this.loginForm.reset();
 }
 
 get username() {
